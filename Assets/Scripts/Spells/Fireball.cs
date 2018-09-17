@@ -25,7 +25,6 @@ public class Fireball : MonoBehaviour
 		direction.Set(0, 0, 1);
 		damage = 2;
 		info = GetComponent<Info>();
-		
 	}
 
 	// Update is called once per frame

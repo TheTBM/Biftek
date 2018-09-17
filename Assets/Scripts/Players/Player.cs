@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public float maxVelocity;
 	private Info info;
 	Vector3 direction;
+	bool initiated = false;
 
 	private Fireball hit;
 
@@ -23,13 +24,15 @@ public class Player : MonoBehaviour
 	{
 		player1 = player2 = true; // change later
 		info = GetComponent<Info>();
-		info.setHealth(health);
-		info.setPlayer(true);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if (!initiated)
+		{
+			initiate();
+		}
 		checkDeath();
 
 		//resets player direction before recalculating it
@@ -98,6 +101,13 @@ public class Player : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	public void initiate()
+	{
+		info.setHealth(health);
+		info.setPlayer(true);
+		initiated = true;
 	}
 
 	//void OnCollisionEnter(Collision other)
