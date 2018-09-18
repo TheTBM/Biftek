@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player 1
-  - Player 2
   - Floor
   - Fireball
+  - 1
+  - 2
   layers:
   - Default
   - TransparentFX

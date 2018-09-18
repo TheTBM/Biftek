@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public float maxVelocity;
 	private Info info;
 	Vector3 direction;
+	Vector3 lookDirection;
 	bool initiated = false;
 
 	private Fireball hit;
@@ -33,66 +34,22 @@ public class Player : MonoBehaviour
 		{
 			initiate();
 		}
+
 		checkDeath();
 
 		//resets player direction before recalculating it
 		direction.Set(0, 0, 0);
 
-		//Player 1 controls
-		if (gameObject.tag == "Player 1")
-		{
-			if (Input.GetKey(KeyCode.UpArrow))
-			{
-				direction.z += 1;
-			}
+		direction.x = Input.GetAxis("Horizontal Left " + gameObject.tag);
+		direction.z = Input.GetAxis("Vertical Left " + gameObject.tag);
 
-			if (Input.GetKey(KeyCode.DownArrow))
-			{
-				direction.z -= 1;
-			}
+		transform.Translate(direction * velocity * Time.deltaTime);
 
-			if (Input.GetKey(KeyCode.LeftArrow))
-			{
-				direction.x -= 1;
-			}
+		lookDirection.x = Input.GetAxis("Horizontal Right " + gameObject.tag);
+		lookDirection.z = Input.GetAxis("Vertical Right " + gameObject.tag);
 
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
-				direction.x += 1;
-			}
+		transform.rotation = Quaternion.LookRotation(lookDirection);
 
-			Debug.Log(info.getHealth());
-
-			direction.Normalize();
-			transform.Translate(direction * velocity * Time.deltaTime);
-		}
-
-		//Player 2 controls
-		if (gameObject.tag == "Player 2")
-		{
-			if (Input.GetKey(KeyCode.W))
-			{
-				direction.z += 1;
-			}
-
-			if (Input.GetKey(KeyCode.S))
-			{
-				direction.z -= 1;
-			}
-
-			if (Input.GetKey(KeyCode.A))
-			{
-				direction.x -= 1;
-			}
-
-			if (Input.GetKey(KeyCode.D))
-			{
-				direction.x += 1;
-			}
-
-			direction.Normalize();
-			transform.Translate(direction * velocity * Time.deltaTime);
-		}
 	}
 
 	void checkDeath()
@@ -109,16 +66,4 @@ public class Player : MonoBehaviour
 		info.setPlayer(true);
 		initiated = true;
 	}
-
-	//void OnCollisionEnter(Collision other)
-	//{
-	//	if (other.gameObject.tag == "Fireball")
-	//	{
-	//		Destroy(other.gameObject);
-	//		hit = new Fireball();
-	//		takeDamage(hit.getDamage());
-	//		Debug.Log(health);
-	//		Debug.Log(hit.getDamage());
-	//	}
-	//}
 }

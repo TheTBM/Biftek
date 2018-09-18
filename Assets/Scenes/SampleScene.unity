@@ -263,6 +263,15 @@ Prefab:
       propertyPath: health
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1807619169482680, guid: 29dc6ac69022355439418459e21255ee, type: 2}
+      propertyPath: m_TagString
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54195006172114966, guid: 29dc6ac69022355439418459e21255ee,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29dc6ac69022355439418459e21255ee, type: 2}
   m_IsPrefabAsset: 0
@@ -350,7 +359,7 @@ GameObject:
   - component: {fileID: 1133787489}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Player 1
+  m_TagString: 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -605,7 +614,7 @@ GameObject:
   - component: {fileID: 1534837956}
   m_Layer: 0
   m_Name: PLaYeR 2
-  m_TagString: Player 2
+  m_TagString: 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -798,6 +807,10 @@ Prefab:
         type: 2}
       propertyPath: health
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948803521291830, guid: 6dad43c6eab2a044aa918cb31566aaa3, type: 2}
+      propertyPath: m_TagString
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dad43c6eab2a044aa918cb31566aaa3, type: 2}

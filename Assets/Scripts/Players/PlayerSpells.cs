@@ -8,6 +8,7 @@ public class PlayerSpells : MonoBehaviour
 	public GameObject Fireball;
 	public GameObject BubbleShield;
 	GameObject copy;
+	Vector3 Aim;
 
 	public const float globalCooldown = 0.5f;
 	float cooldown;
@@ -21,7 +22,7 @@ public class PlayerSpells : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (player.tag == "Player 2")
+		if (player.tag == "2")
 		{
 			if (cooldown <= 0)
 			{
@@ -34,7 +35,7 @@ public class PlayerSpells : MonoBehaviour
 				else if (Input.GetKey(KeyCode.V))
 				{
 					copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
-					copy.tag = "Player 2";
+					copy.tag = "2";
 					cooldown = globalCooldown;
 				}
 			}
@@ -44,7 +45,7 @@ public class PlayerSpells : MonoBehaviour
 			}
 		}
 
-		if (player.tag == "Player 1")
+		if (player.tag == "1")
 		{
 			if (cooldown <= 0)
 			{
@@ -57,7 +58,7 @@ public class PlayerSpells : MonoBehaviour
 				else if (Input.GetKey(KeyCode.O))
 				{
 					copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
-					copy.tag = "Player 1";
+					copy.tag = "1";
 					cooldown = globalCooldown;
 				}
 			}
