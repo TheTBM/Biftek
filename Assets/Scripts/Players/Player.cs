@@ -43,7 +43,9 @@ public class Player : MonoBehaviour
 		direction.x = Input.GetAxis("Horizontal Left " + gameObject.tag);
 		direction.z = Input.GetAxis("Vertical Left " + gameObject.tag);
 
-		transform.Translate(direction * velocity * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
+
+        transform.Translate(direction * velocity * Time.deltaTime);
 
 		lookDirection.x = Input.GetAxis("Horizontal Right " + gameObject.tag);
 		lookDirection.z = Input.GetAxis("Vertical Right " + gameObject.tag);

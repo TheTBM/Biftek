@@ -11,7 +11,13 @@ public class PlayerSpells : MonoBehaviour
 	Vector3 Aim;
 
 	public const float globalCooldown = 0.5f;
+    public const float fireballBaseCooldown = 1.0f;
+    public const float bubbleshieldBaseCooldown = 6.0f;
 	float cooldown;
+    float fireballCooldown;
+    float bubbleshieldCooldown;
+
+
 
 	// Use this for initialization
 	void Start ()
@@ -26,22 +32,19 @@ public class PlayerSpells : MonoBehaviour
 		{
 			if (cooldown <= 0)
 			{
-				if (Input.GetKey(KeyCode.C))
+				if (Input.GetKey(KeyCode.Joystick6Button5) && fireballCooldown <= 0)
 				{
-					copy = Instantiate(Fireball, player.transform.position + (Vector3.forward * 1.75f), player.transform.rotation) as GameObject;
+					copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                    fireballCooldown = fireballBaseCooldown;
 					cooldown = globalCooldown;
 				}
-
-				else if (Input.GetKey(KeyCode.V))
+				else if (Input.GetKey(KeyCode.Joystick6Button4) && bubbleshieldCooldown <= 0)
 				{
 					copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
 					copy.tag = "2";
+                    bubbleshieldCooldown = bubbleshieldBaseCooldown;
 					cooldown = globalCooldown;
 				}
-			}
-			else
-			{
-				cooldown -= Time.deltaTime;
 			}
 		}
 
@@ -49,23 +52,25 @@ public class PlayerSpells : MonoBehaviour
 		{
 			if (cooldown <= 0)
 			{
-				if (Input.GetKey(KeyCode.P))
+				if (Input.GetKey(KeyCode.Joystick5Button5) && fireballCooldown <= 0)
 				{
-					copy = Instantiate(Fireball, player.transform.position + (Vector3.forward * 1.75f), player.transform.rotation) as GameObject;
-					cooldown = globalCooldown;
+					copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                    fireballCooldown = fireballBaseCooldown;
+                    cooldown = globalCooldown;
 				}
 
-				else if (Input.GetKey(KeyCode.O))
+				else if (Input.GetKey(KeyCode.Joystick5Button4) && bubbleshieldCooldown <= 0)
 				{
 					copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
 					copy.tag = "1";
-					cooldown = globalCooldown;
+                    bubbleshieldCooldown = bubbleshieldBaseCooldown;
+                    cooldown = globalCooldown;
 				}
 			}
-			else
-			{
-				cooldown -= Time.deltaTime;
-			}
 		}
-	}
+
+        cooldown -= Time.deltaTime;
+        fireballCooldown -= Time.deltaTime;
+        bubbleshieldCooldown -= Time.deltaTime;
+    }
 }

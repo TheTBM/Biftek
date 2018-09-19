@@ -24,7 +24,7 @@ public class Fireball : MonoBehaviour
 	{
 		direction.Set(0, 0, 1);
 		damage = 2;
-		info = GetComponent<Info>();
+        info = GetComponent<Info>();
 	}
 
 	// Update is called once per frame
@@ -49,15 +49,18 @@ public class Fireball : MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
-		info.setDamage(damage);
-		otherInfo = other.gameObject.GetComponent<Info>();
+        if (other.gameObject.tag != "Fireball")
+        {
+            info.setDamage(damage);
+            otherInfo = other.gameObject.GetComponent<Info>();
 
-		//if (otherInfo.getPlayer())
-		{
-			otherInfo.takeDamage(info.getDamage());
-			Debug.Log("Success");
-		}
+            //if (otherInfo.getPlayer())
+            {
+                otherInfo.takeDamage(info.getDamage());
+                Debug.Log("Success");
+            }
 
-		Destroy(gameObject);
+            Destroy(gameObject);
+        }
 	}
 }
