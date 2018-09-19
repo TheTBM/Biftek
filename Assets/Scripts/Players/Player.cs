@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ControllerInputs;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
 	Vector3 direction;
 	Vector3 lookDirection;
 	bool initiated = false;
+	int controller;
 
 	private Fireball hit;
 
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
 	{
 		player1 = player2 = true; // change later
 		info = GetComponent<Info>();
+		ControllerPluginWrapper.Initiate();
 	}
 	
 	// Update is called once per frame
@@ -35,22 +38,37 @@ public class Player : MonoBehaviour
 			initiate();
 		}
 
+		ControllerPluginWrapper.UpdateControllers();
+		int.TryParse(gameObject.tag, out controller);
+		controller -= 1;
+
 		checkDeath();
 
 		//resets player direction before recalculating it
 		direction.Set(0, 0, 0);
 
-		direction.x = Input.GetAxis("Horizontal Left " + gameObject.tag);
-		direction.z = Input.GetAxis("Vertical Left " + gameObject.tag);
+		if (!ControllerPluginWrapper.LStick_InDeadZone(controller))
+		{
+			direction.x = ControllerPluginWrapper.LeftStick_X(controller);
+			direction.z = ControllerPluginWrapper.LeftStick_Y(controller);
+		}
 
         transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
 
         transform.Translate(direction * velocity * Time.deltaTime);
 
-		lookDirection.x = Input.GetAxis("Horizontal Right " + gameObject.tag);
-		lookDirection.z = Input.GetAxis("Vertical Right " + gameObject.tag);
+		if (!ControllerPluginWrapper.RStick_InDeadZone(controller))
+		{
+			lookDirection.x = ControllerPluginWrapper.RightStick_X(controller);
+			lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
+		}
+
+		//lookDirection.x = Input.GetAxis("Horizontal Right " + gameObject.tag);
+		//lookDirection.z = Input.GetAxis("Vertical Right " + gameObject.tag);
 
 		transform.rotation = Quaternion.LookRotation(lookDirection);
+
+		ControllerPluginWrapper.RefreshStates();
 
 	}
 
