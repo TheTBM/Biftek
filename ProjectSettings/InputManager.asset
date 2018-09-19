@@ -35,7 +35,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 3
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: Vertical Left 1
@@ -67,7 +67,7 @@ InputManager:
     snap: 0
     invert: 1
     type: 2
-    axis: 4
+    axis: 5
     joyNum: 2
   - serializedVersion: 3
     m_Name: Horizontal Left 2
@@ -99,7 +99,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 3
+    axis: 2
     joyNum: 3
   - serializedVersion: 3
     m_Name: Vertical Left 2
@@ -131,5 +131,5 @@ InputManager:
     snap: 0
     invert: 1
     type: 2
-    axis: 4
+    axis: 5
     joyNum: 3
