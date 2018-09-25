@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public int health;
 	public float velocity;
 	public float maxVelocity;
+	public SpawnManager spawner;
 	private Info info;
 	Vector3 direction;
 	Vector3 lookDirection;
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
 	{
 		if (info.getHealth() <= 0)
 		{
+			spawner.playerDead(controller);
 			Destroy(gameObject);
 		}
 	}
