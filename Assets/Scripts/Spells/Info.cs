@@ -7,6 +7,7 @@ public class Info : MonoBehaviour
 	private int health; // health
 	private bool player; //is it a player?
 	private int damage; //damage
+	private float timer;
 
 	// Use this for initialization
 	void Start ()
@@ -55,5 +56,20 @@ public class Info : MonoBehaviour
 	public int getDamage()
 	{
 		return damage;
+	}
+
+	public void setTimer(float t)
+	{
+		timer = t;
+	}
+
+	public void decreaseTimer(float t)
+	{
+		timer -= t;
+	}
+
+	public float getTimer()
+	{
+		return timer;
 	}
 }

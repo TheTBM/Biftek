@@ -11,6 +11,10 @@ public class SpawnManager : MonoBehaviour
 
 	GameObject player1Copy;
 	GameObject player2Copy;
+
+	Player player1;
+	Player player2;
+
 	public GameObject Player;
 
 	public Material player1Material;
@@ -22,46 +26,41 @@ public class SpawnManager : MonoBehaviour
 
 	int[] scores;
 
-
 	// Use this for initialization
 	void Start ()
 	{
-		playerAlive = new bool[4];
-		scores = new int[4];
-		for (int i = 0; i < 4; i++)
-		{
-			scores[i] = 0;
-			playerAlive[i] = false;
-		}
+		player1Copy = Instantiate(Player, Spawn1.transform.position, Spawn1.transform.rotation) as GameObject;
+		player1Copy.tag = "1";
+		player1Copy.GetComponent<Renderer>().material = player1Material;
+		player1 = player1Copy.GetComponent<Player>();
+
+		player2Copy = Instantiate(Player, Spawn2.transform.position, Spawn2.transform.rotation) as GameObject;
+		player2Copy.tag = "2";
+		player2Copy.GetComponent<Renderer>().material = player2Material;
+		player2 = player2Copy.GetComponent<Player>();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (playerAlive[0] == false)
+		if (!player1.isAlive())
 		{
-			player1Copy = Instantiate(Player, Spawn1.transform.position, Spawn1.transform.rotation) as GameObject;
-			player1Copy.tag = "1";
-			player1Copy.GetComponent<Renderer>().material = player1Material;
-			playerAlive[0] = true;
+			player1.decreaseRespawnTimer(Time.deltaTime);
+
+			if (player1.getRespawnTimer() <= 0.0f)
+			{
+				player1.respawn(player1Material, Spawn1);
+			}
 		}
 
-		if (playerAlive[1] == false)
+		if (!player2.isAlive())
 		{
-			player2Copy = Instantiate(Player, Spawn2.transform.position, Spawn2.transform.rotation) as GameObject;
-			player2Copy.tag = "2";
-			player2Copy.GetComponent<Renderer>().material = player2Material;
-			playerAlive[1] = true;
+			player2.decreaseRespawnTimer(Time.deltaTime);
+
+			if (player2.getRespawnTimer() <= 0.0f)
+			{
+				player2.respawn(player1Material, Spawn1);
+			}
 		}
-	}
-
-	public void playerDead(int player)
-	{
-		playerAlive[player] = false;
-	}
-
-	public bool[] getPlayersAlive()
-	{
-		return playerAlive;
 	}
 }

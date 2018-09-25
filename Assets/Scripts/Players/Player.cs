@@ -8,27 +8,28 @@ public class Player : MonoBehaviour
 	//Player variables
 	public int health;
 	public float velocity;
-	public float maxVelocity;
-	public SpawnManager spawner;
-	private Info info;
+	Info info;
 	Vector3 direction;
 	Vector3 lookDirection;
 	bool initiated = false;
 	int controller;
+	int points;
+	public float respawnTimer;
 
-	private Fireball hit;
+	bool alive;
 
-	bool player1;
-	bool player2;
+	public Material dead;
+	Vector3 deadPosition;
 
 	public GameObject gameObject;
 
 	// Use this for initialization
 	void Start ()
 	{
-		player1 = player2 = true; // change later
 		info = GetComponent<Info>();
 		ControllerPluginWrapper.Initiate();
+		deadPosition = new Vector3(0, -10, 0);
+		alive = true;
 	}
 	
 	// Update is called once per frame
@@ -39,11 +40,14 @@ public class Player : MonoBehaviour
 			initiate();
 		}
 
+		if (info.getHealth() <= 0)
+		{
+			kill();
+		}
+
 		ControllerPluginWrapper.UpdateControllers();
 		int.TryParse(gameObject.tag, out controller);
 		controller -= 1;
-
-		checkDeath();
 
 		//resets player direction before recalculating it
 		direction.Set(0, 0, 0);
@@ -64,22 +68,59 @@ public class Player : MonoBehaviour
 			lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
 		}
 
-		//lookDirection.x = Input.GetAxis("Horizontal Right " + gameObject.tag);
-		//lookDirection.z = Input.GetAxis("Vertical Right " + gameObject.tag);
-
 		transform.rotation = Quaternion.LookRotation(lookDirection);
 
 		ControllerPluginWrapper.RefreshStates();
-
 	}
 
-	void checkDeath()
+	public void kill()
 	{
-		if (info.getHealth() <= 0)
-		{
-			spawner.playerDead(controller);
-			Destroy(gameObject);
-		}
+		alive = false;
+		gameObject.GetComponent<Renderer>().material = dead;
+		gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
+	}
+
+	public void respawn(Material m, GameObject location)
+	{
+		alive = true;
+		info.setHealth(health);
+		gameObject.GetComponent<Renderer>().material = m;
+		gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
+	}
+
+	public bool isAlive()
+	{
+		return alive;
+	}
+
+	public void addPoints(int p)
+	{
+		points += p;
+	}
+
+	public int getPoints()
+	{
+		return points;
+	}
+
+	public int getHealth()
+	{
+		return info.getHealth();
+	}
+
+	public void resetRespawnTimer()
+	{
+		info.setTimer(respawnTimer);
+	}
+
+	public void decreaseRespawnTimer(float t)
+	{
+		info.decreaseTimer(t);
+	}
+
+	public float getRespawnTimer()
+	{
+		return info.getTimer();
 	}
 
 	public void initiate()

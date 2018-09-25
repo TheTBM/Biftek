@@ -38,6 +38,10 @@ public class PlayerSpells : MonoBehaviour
 			if (ControllerPluginWrapper.GetButtonPressed(controller, 9) && fireballCooldown <= 0)
 			{
 				copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+
+				Fireball fireball = copy.GetComponent<Fireball>();
+				fireball.owner = controller;
+
 				fireballCooldown = fireballBaseCooldown;
 				cooldown = globalCooldown;
 			}

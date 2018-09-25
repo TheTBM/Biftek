@@ -12,7 +12,8 @@ public class Fireball : MonoBehaviour
 	private Info info;
 	private Info otherInfo;
 	public int owner;
-	Player player;
+	Player friendlyPlayer;
+	Player enemyPlayer;
 
 	public Fireball()
 	{
@@ -54,13 +55,26 @@ public class Fireball : MonoBehaviour
             info.setDamage(damage);
             otherInfo = other.gameObject.GetComponent<Info>();
 
-            //if (otherInfo.getPlayer())
-            {
-                otherInfo.takeDamage(info.getDamage());
-                Debug.Log("Success");
-            }
+			if (otherInfo.getPlayer())
+			{
+				enemyPlayer = other.gameObject.GetComponent<Player>();
+				otherInfo.takeDamage(info.getDamage());
+				Destroy(gameObject);
 
-            Destroy(gameObject);
+				if (otherInfo.getHealth() <= 0)
+				{
+					enemyPlayer.resetRespawnTimer();
+					friendlyPlayer = GameObject.FindGameObjectWithTag(owner.ToString()).GetComponent<Player>();
+					friendlyPlayer.addPoints(1);
+				}
+			}
+
+			else
+			{
+				otherInfo.takeDamage(info.getDamage());
+				Destroy(gameObject);
+			}
+
         }
 	}
 }

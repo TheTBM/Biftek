@@ -142,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   velocity: 5
-  maxVelocity: 5
-  spawner: {fileID: 0}
+  respawnTimer: 3
+  dead: {fileID: 2100000, guid: 97edc11468cdd184bbd561e7883c7b16, type: 2}
   gameObject: {fileID: 1994128559896836}
 --- !u!136 &136352226499971890
 CapsuleCollider:
