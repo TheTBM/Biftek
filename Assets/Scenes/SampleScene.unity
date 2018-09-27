@@ -149,6 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1637c82d66ba75c4f84a9d69141779b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
 --- !u!20 &519420031
@@ -640,11 +645,11 @@ MonoBehaviour:
   Spawn2: {fileID: 538017034}
   Spawn3: {fileID: 1690906239}
   Spawn4: {fileID: 888968239}
-  Player: {fileID: 1994128559896836, guid: 2b40535b8b0868e479c971c55880be5b, type: 2}
+  Player: {fileID: 1818578248344628, guid: 2b40535b8b0868e479c971c55880be5b, type: 2}
   player1Material: {fileID: 2100000, guid: 341bcb7d2e778654eb9a796ea3123e77, type: 2}
   player2Material: {fileID: 2100000, guid: 47f1b81c58330f547838db4ab077a6c8, type: 2}
-  player3Material: {fileID: 0}
-  player4Material: {fileID: 0}
+  player3Material: {fileID: 2100000, guid: 12b551fd4e267b24d9a677c289f99346, type: 2}
+  player4Material: {fileID: 2100000, guid: f7c2041e22475144ca927fd173cdda3d, type: 2}
 --- !u!4 &1151053562
 Transform:
   m_ObjectHideFlags: 0
