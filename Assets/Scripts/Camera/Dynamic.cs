@@ -12,6 +12,7 @@ public class Dynamic : MonoBehaviour
 	int numAlive;
 	Vector3 position;
 	Vector3 prevPosition;
+    Vector3 avgPos;
 	float magnitude;
 	float prevMagnitude;
 
@@ -27,6 +28,7 @@ public class Dynamic : MonoBehaviour
 		numAlive = 0;
 		prevPosition = position;
 		position.Set(0, 0, 0);
+        avgPos.Set(0, 0, 0);
 		
 		for (int i = 0; i < 4; i++)
 		{
@@ -34,14 +36,14 @@ public class Dynamic : MonoBehaviour
 			players[i] = GameObject.FindGameObjectWithTag(temp.ToString());
 			if (players[i].GetComponent<Player>().isAlive())
 			{
-				//position += players[i].transform.position;
+				avgPos += players[i].transform.position;
 				numAlive++;
 			}
 		}
 		
 		if (numAlive > 0)
 		{
-			position /= numAlive;
+			avgPos /= numAlive;
 		}
 
 		prevMagnitude = magnitude;
@@ -56,10 +58,10 @@ public class Dynamic : MonoBehaviour
 					if (players[i].GetComponent<Player>().isAlive() && players[j].GetComponent<Player>().isAlive())
 					{
 						float temp = Mathf.Abs((players[i].transform.position - players[j].transform.position).magnitude);
-						if (temp > magnitude) ;
+						if (temp > magnitude)
 						{
 							magnitude = temp;
-							position = players[i].transform.position + players[j];
+							position = (players[i].transform.position + players[j].transform.position) / 2;
 						}
 					}
 				}
@@ -69,11 +71,12 @@ public class Dynamic : MonoBehaviour
 		{
 			magnitude = 10.0f;
 		}
-		position = (prevPosition * 0.95f) + (0.05f * position);
-		magnitude = (prevMagnitude * 0.95f) + (0.05f * magnitude);
-		//Vector3 position = (player1.transform.position + player2.transform.position) / 2;
-		transform.SetPositionAndRotation(position, transform.rotation);
-		//transform.Translate(-Vector3.forward * (Mathf.Abs((player1.transform.position - player2.transform.position).magnitude) + 5));
-		transform.Translate(-Vector3.forward * (magnitude + 5));
+
+        position = (avgPos * 0.67f + position * 0.33f) / 2;
+
+		position = (prevPosition * 0.97f) + (0.03f * position);
+		magnitude = (prevMagnitude * 0.97f) + (0.03f * magnitude);
+		transform.SetPositionAndRotation(new Vector3(position.x, position.y, position.z - magnitude * 0.1f), transform.rotation);
+		transform.Translate(-Vector3.forward * (magnitude * 0.6f + 5));
 	}
 }
