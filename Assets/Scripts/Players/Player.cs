@@ -5,128 +5,142 @@ using ControllerInputs;
 
 public class Player : MonoBehaviour
 {
-	//Player variables
-	public int health;
-	public float velocity;
-	Info info;
-	Vector3 direction;
-	Vector3 lookDirection;
-	bool initiated = false;
-	int controller;
-	int points;
-	public float respawnTimer;
+    //Player variables
+    public int health;
+    public float velocity;
+    Info info;
+    Vector3 direction;
+    Vector3 lookDirection;
+    bool initiated = false;
+    int controller;
+    int points;
+    public float respawnTimer;
 
-	bool alive;
+    bool alive;
 
-	public Material dead;
-	Vector3 deadPosition;
+    public Material dead;
+    Vector3 deadPosition;
 
-	public GameObject gameObject;
+    // Use this for initialization
+    void Start()
+    {
+        info = GetComponent<Info>();
+        ControllerPluginWrapper.Initiate();
+        deadPosition = new Vector3(0, -10, 0);
+        alive = true;
+    }
 
-	// Use this for initialization
-	void Start ()
-	{
-		info = GetComponent<Info>();
-		ControllerPluginWrapper.Initiate();
-		deadPosition = new Vector3(0, -10, 0);
-		alive = true;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (!initiated)
-		{
-			initiate();
-		}
+    // Update is called once per frame
+    void Update()
+    {
+        if (!initiated)
+        {
+            initiate();
+        }
 
-		if (info.getHealth() <= 0)
-		{
-			kill();
-		}
+        if (info.getHealth() <= 0)
+        {
+            kill();
+        }
 
-		ControllerPluginWrapper.UpdateControllers();
-		int.TryParse(gameObject.tag, out controller);
-		controller -= 1;
+        ControllerPluginWrapper.UpdateControllers();
+        int.TryParse(gameObject.tag, out controller);
+        controller -= 1;
 
-		//resets player direction before recalculating it
-		direction.Set(0, 0, 0);
+        //resets player direction before recalculating it
+        direction.Set(0, 0, 0);
 
-		if (!ControllerPluginWrapper.LStick_InDeadZone(controller))
-		{
-			direction.x = ControllerPluginWrapper.LeftStick_X(controller);
-			direction.z = ControllerPluginWrapper.LeftStick_Y(controller);
-		}
+        if (!ControllerPluginWrapper.LStick_InDeadZone(controller))
+        {
+            direction.x = ControllerPluginWrapper.LeftStick_X(controller);
+            direction.z = ControllerPluginWrapper.LeftStick_Y(controller);
+        }
 
-        transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
+        transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
 
-        transform.Translate(direction * velocity * Time.deltaTime);
+        //transform.Translate(direction * velocity * Time.deltaTime);
+        if (transform.GetComponent<Rigidbody>().velocity.magnitude < 10.0f)
+        {
+            transform.GetComponent<Rigidbody>().AddForce(direction * Mathf.Pow(velocity, 2));
+            
+        }
 
-		if (!ControllerPluginWrapper.RStick_InDeadZone(controller))
-		{
-			lookDirection.x = ControllerPluginWrapper.RightStick_X(controller);
-			lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
-		}
+        if (transform.GetComponent<Rigidbody>().velocity.magnitude > 10.0f)
+        {
+            transform.GetComponent<Rigidbody>().velocity = transform.GetComponent<Rigidbody>().velocity.normalized * 10.0f;
+        }
 
-		transform.rotation = Quaternion.LookRotation(lookDirection);
+        if (!ControllerPluginWrapper.RStick_InDeadZone(controller))
+        {
+            lookDirection.x = ControllerPluginWrapper.RightStick_X(controller);
+            lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
+        }
 
-		ControllerPluginWrapper.RefreshStates();
-	}
+        transform.rotation = Quaternion.LookRotation(lookDirection);
 
-	public void kill()
-	{
-		alive = false;
-		gameObject.GetComponent<Renderer>().material = dead;
-		gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
-	}
+        ControllerPluginWrapper.RefreshStates();
+    }
 
-	public void respawn(Material m, GameObject location)
-	{
-		alive = true;
-		info.setHealth(health);
-		gameObject.GetComponent<Renderer>().material = m;
-		gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
-	}
+    public void kill()
+    {
+        alive = false;
+        gameObject.GetComponent<Renderer>().material = dead;
+        Color temp = GetComponentInChildren<SpriteRenderer>().color;
+        temp.a = 0.0f;
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
+        gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
+    }
 
-	public bool isAlive()
-	{
-		return alive;
-	}
+    public void respawn(Material m, GameObject location)
+    {
+        alive = true;
+        info.setHealth(health);
+        gameObject.GetComponent<Renderer>().material = m;
+        Color temp = GetComponentInChildren<SpriteRenderer>().color;
+        temp.a = 0.2f;
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
+        gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
+    }
 
-	public void addPoints(int p)
-	{
-		points += p;
-	}
+    public bool isAlive()
+    {
+        return alive;
+    }
 
-	public int getPoints()
-	{
-		return points;
-	}
+    public void addPoints(int p)
+    {
+        points += p;
+    }
 
-	public int getHealth()
-	{
-		return info.getHealth();
-	}
+    public int getPoints()
+    {
+        return points;
+    }
 
-	public void resetRespawnTimer()
-	{
-		info.setTimer(respawnTimer);
-	}
+    public int getHealth()
+    {
+        return info.getHealth();
+    }
 
-	public void decreaseRespawnTimer(float t)
-	{
-		info.decreaseTimer(t);
-	}
+    public void resetRespawnTimer()
+    {
+        info.setTimer(respawnTimer);
+    }
 
-	public float getRespawnTimer()
-	{
-		return info.getTimer();
-	}
+    public void decreaseRespawnTimer(float t)
+    {
+        info.decreaseTimer(t);
+    }
 
-	public void initiate()
-	{
-		info.setHealth(health);
-		info.setPlayer(true);
-		initiated = true;
-	}
+    public float getRespawnTimer()
+    {
+        return info.getTimer();
+    }
+
+    public void initiate()
+    {
+        info.setHealth(health);
+        info.setPlayer(true);
+        initiated = true;
+    }
 }
