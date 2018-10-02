@@ -40,7 +40,7 @@ public class PlayerSpells : MonoBehaviour
 				copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
 				Fireball fireball = copy.GetComponent<Fireball>();
-				fireball.owner = controller;
+				fireball.owner = controller + 1;
 
 				fireballCooldown = fireballBaseCooldown;
 				cooldown = globalCooldown;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class SpawnManager : MonoBehaviour
 	GameObject player2Copy;
 	GameObject player3Copy;
 	GameObject player4Copy;
+
+	public GameObject[] players = new GameObject[4];
 
 	Player player1;
 	Player player2;
@@ -80,6 +83,13 @@ public class SpawnManager : MonoBehaviour
 			{
 				player4.respawn(player4Material, Spawn4);
 			}
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			int temp = i + 1;
+			players[i] = GameObject.FindGameObjectWithTag(temp.ToString());
+			GameObject.Find("player" + temp.ToString() + "lives").GetComponent<Text>().text = players[i].GetComponent<Player>().getPoints().ToString();
 		}
 	}
 

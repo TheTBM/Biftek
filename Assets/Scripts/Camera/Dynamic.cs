@@ -72,11 +72,11 @@ public class Dynamic : MonoBehaviour
 			magnitude = 10.0f;
 		}
 
-        position = (avgPos * 0.67f + position * 0.33f) / 2;
+        position = (avgPos * 0.1f + position * 0.9f);
 
-		position = (prevPosition * 0.97f) + (0.03f * position);
-		magnitude = (prevMagnitude * 0.97f) + (0.03f * magnitude);
-		transform.SetPositionAndRotation(new Vector3(position.x, position.y, position.z - magnitude * 0.1f), transform.rotation);
-		transform.Translate(-Vector3.forward * (magnitude * 0.6f + 5));
+		position = (prevPosition * 0.98f) + (0.02f * position);
+		magnitude = (prevMagnitude * 0.98f) + (0.02f * magnitude);
+		transform.SetPositionAndRotation(new Vector3(position.x, position.y, position.z - magnitude * 0.15f), transform.rotation);
+		transform.Translate(-Vector3.forward * (magnitude * 0.7f + 5));
 	}
 }
