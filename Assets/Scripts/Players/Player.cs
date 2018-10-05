@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     //Player variables
     public int health;
+    public int lives;
     public float velocity;
     Info info;
     Vector3 direction;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
             initiate();
         }
 
-        if (info.getHealth() <= 0)
+        if (info.getHealth() <= 0 && alive)
         {
             kill();
         }
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
     public void kill()
     {
         alive = false;
+        info.loseLive();
         gameObject.GetComponent<Renderer>().material = dead;
         Color temp = GetComponentInChildren<SpriteRenderer>().color;
         temp.a = 0.0f;
@@ -140,6 +142,7 @@ public class Player : MonoBehaviour
     public void initiate()
     {
         info.setHealth(health);
+        info.resetLives(lives);
         info.setPlayer(true);
         initiated = true;
     }

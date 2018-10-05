@@ -5,6 +5,7 @@ using UnityEngine;
 public class Info : MonoBehaviour
 {
 	private int health; // health
+    private int lives;
 	private bool player; //is it a player?
 	private int damage; //damage
 	private float timer;
@@ -27,6 +28,31 @@ public class Info : MonoBehaviour
 	{
 		health = x;
 	}
+
+    //player loses one live
+    public void loseLive()
+    {
+        lives -= 1;
+    }
+
+    //return lives
+    public bool isDead()
+    {
+        if (lives <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //player lives get reset
+    public void resetLives(int stock)
+    {
+        lives = stock;
+    }
 
 	//return health
 	public int getHealth()

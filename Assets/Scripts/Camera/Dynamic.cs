@@ -37,6 +37,7 @@ public class Dynamic : MonoBehaviour
 			if (players[i].GetComponent<Player>().isAlive())
 			{
 				avgPos += players[i].transform.position;
+                position = players[i].transform.position;
 				numAlive++;
 			}
 		}
@@ -69,7 +70,7 @@ public class Dynamic : MonoBehaviour
 		}
 		else
 		{
-			magnitude = 10.0f;
+			magnitude = 15.0f;
 		}
 
         position = (avgPos * 0.1f + position * 0.9f);

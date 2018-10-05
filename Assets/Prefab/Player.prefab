@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  lives: 3
   velocity: 10
   respawnTimer: 3
   dead: {fileID: 2100000, guid: 97edc11468cdd184bbd561e7883c7b16, type: 2}
