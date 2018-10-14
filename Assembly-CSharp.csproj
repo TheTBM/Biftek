@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Players\Player.cs" />
      <Compile Include="Assets\Scripts\Players\PlayerSpells.cs" />
      <Compile Include="Assets\Scripts\Players\SpawnManager.cs" />
+     <Compile Include="Assets\Scripts\Spells\Boulder.cs" />
      <Compile Include="Assets\Scripts\Spells\BubbleShield.cs" />
      <Compile Include="Assets\Scripts\Spells\Fireball.cs" />
      <Compile Include="Assets\Scripts\Spells\Info.cs" />
