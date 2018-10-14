@@ -34,6 +34,7 @@ public class Dynamic : MonoBehaviour
 		{
 			int temp = i + 1;
 			players[i] = GameObject.FindGameObjectWithTag(temp.ToString());
+
 			if (players[i].GetComponent<Player>().isAlive())
 			{
 				avgPos += players[i].transform.position;
