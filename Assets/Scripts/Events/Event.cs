@@ -76,7 +76,7 @@ namespace Events
 				if (playersInZone.Count == 1)
 				{
 					Color color = playersInZone[0].GetComponent<Renderer>().material.color;
-					color.a = 100;
+					color.a = 0.5f;
 
 					copy.GetComponent<Renderer>().material.SetColor("_Color", color);
 
@@ -85,7 +85,7 @@ namespace Events
 
 				else
 				{
-					Color color = new Color(0.5f, 0.5f, 0.5f, 100);
+					Color color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 					copy.GetComponent<Renderer>().material.SetColor("_Color", color);
 				}
 

@@ -10,6 +10,7 @@ public class PlayerSpells : MonoBehaviour
 	public GameObject BubbleShield;
 	public GameObject Boulder;
 
+	Player realPlayer;
 	GameObject copy;
 	Vector3 Aim;
 
@@ -17,18 +18,22 @@ public class PlayerSpells : MonoBehaviour
     public const float fireballBaseCooldown = 1.0f;
     public const float bubbleshieldBaseCooldown = 6.0f;
 	public const float boulderBaseCooldown = 5.0f;
+	public const float dashBaseCooldown = 1.0f;
 
 	float cooldown;
     float fireballCooldown;
     float bubbleshieldCooldown;
 	float boulderCooldown;
+	float dashCooldown;
 	int controller;
 
+	float currentlyDashing;
+	float maxDashTimer = 0.5f;
 
 	// Use this for initialization
 	void Start ()
 	{
-
+		realPlayer = player.GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
@@ -38,7 +43,17 @@ public class PlayerSpells : MonoBehaviour
 		int.TryParse(player.tag, out controller);
 		controller -= 1;
 
-		if (cooldown <= 0)
+		if (realPlayer.dashing)
+		{
+			currentlyDashing -= Time.deltaTime;
+
+			if (currentlyDashing <= 0.0f)
+			{
+				realPlayer.dashing = false;
+			}
+		}
+
+		else if (cooldown <= 0)
 		{
 			if (ControllerPluginWrapper.GetButtonPressed(controller, 9) && fireballCooldown <= 0.0f)
 			{
@@ -69,12 +84,23 @@ public class PlayerSpells : MonoBehaviour
 				boulderCooldown = boulderBaseCooldown;
 				cooldown = globalCooldown;
 			}
+
+			else if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f && dashCooldown <= 0.0f)
+			{
+				realPlayer.saveDirection();
+				realPlayer.dashing = true;
+				currentlyDashing = maxDashTimer;
+				dashCooldown = dashBaseCooldown;
+				cooldown = globalCooldown;
+			}
 		}
 
         cooldown -= Time.deltaTime;
         fireballCooldown -= Time.deltaTime;
         bubbleshieldCooldown -= Time.deltaTime;
 		boulderCooldown -= Time.deltaTime;
+		currentlyDashing -= Time.deltaTime;
+		dashCooldown -= Time.deltaTime;
 
 		ControllerPluginWrapper.RefreshStates();
     }
