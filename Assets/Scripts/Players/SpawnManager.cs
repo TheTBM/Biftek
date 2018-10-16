@@ -80,7 +80,7 @@ public class SpawnManager : MonoBehaviour
         {
             int temp = i + 1;
             playerCopies[i] = GameObject.FindGameObjectWithTag(temp.ToString());
-            GameObject.Find("player" + temp.ToString() + "lives").GetComponent<Text>().text = players[i].GetComponent<Player>().getPoints().ToString();
+            GameObject.Find("Player" + temp + "UI").GetComponentInChildren<Text>().text = players[i].GetComponent<Player>().getPoints().ToString();
 		}
     }
 
