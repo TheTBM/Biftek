@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
         {
 
             Debug.Log(transform.forward);
-            Debug.Log(dashDirection);
         }
         ControllerPluginWrapper.RefreshStates();
 

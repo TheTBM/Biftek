@@ -50,7 +50,7 @@ public class Fireball : MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag != "Fireball")
+		if (other.gameObject.tag != "Fireball" && other.gameObject.tag != "River")
 		{
 			info.setDamage(damage);
 
@@ -79,7 +79,6 @@ public class Fireball : MonoBehaviour
 
 			Destroy(gameObject);
 		}
-
 		else
 		{
 			Physics.IgnoreCollision(GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
