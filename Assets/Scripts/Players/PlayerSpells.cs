@@ -55,6 +55,7 @@ public class PlayerSpells : MonoBehaviour
 
 		else if (cooldown <= 0)
 		{
+            //R1
 			if (ControllerPluginWrapper.GetButtonPressed(controller, 9) && fireballCooldown <= 0.0f)
 			{
 				copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
@@ -66,6 +67,7 @@ public class PlayerSpells : MonoBehaviour
 				cooldown = globalCooldown;
 			}
 
+            //L1
 			else if (ControllerPluginWrapper.GetButtonPressed(controller, 8) && bubbleshieldCooldown <= 0.0f)
 			{
 				copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
@@ -104,4 +106,10 @@ public class PlayerSpells : MonoBehaviour
 
 		ControllerPluginWrapper.RefreshStates();
     }
+
+    public void triggerGlobalCooldown()
+    {
+        cooldown = globalCooldown;
+    }
+
 }

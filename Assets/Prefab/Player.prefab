@@ -146,8 +146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   lives: 3
-  velocity: 10
+  velocity: 7
   respawnTimer: 3
+  canUseSpells: 1
   dashing: 0
   dead: {fileID: 2100000, guid: 97edc11468cdd184bbd561e7883c7b16, type: 2}
 --- !u!114 &114498403931500414

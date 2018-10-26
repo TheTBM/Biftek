@@ -12,6 +12,7 @@ TagManager:
   - 4
   - Boulder
   - River
+  - PickUp
   layers:
   - Default
   - TransparentFX
@@ -48,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Actually Show Up
+    uniqueID: 3517307019
     locked: 0

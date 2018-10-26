@@ -42,7 +42,7 @@ namespace ControllerInputs
 		[DllImport(DLL_NAME)]
 		public static extern float RightTrigger(int index);
 
-		[DllImport(DLL_NAME)]
+        [DllImport(DLL_NAME)]
 		public static extern bool GetButtonPressed(int index, int button);
 
 		[DllImport(DLL_NAME)]
@@ -53,6 +53,9 @@ namespace ControllerInputs
 
 		[DllImport(DLL_NAME)]
 		public static extern bool GetPrevLeftStickMoveX(int index, float threshold);
+
+        [DllImport(DLL_NAME)]
+        public static extern bool GetButtonReleased(int index, int button);
 
 		[DllImport(DLL_NAME)]
 		public static extern bool GetPrevLeftStickMoveY(int index, float threshold);

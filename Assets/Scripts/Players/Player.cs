@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ControllerPluginWrapper.UpdateControllers();
+
         if (!initiated)
         {
             initiate();
@@ -47,7 +49,6 @@ public class Player : MonoBehaviour
             kill();
         }
 
-        ControllerPluginWrapper.UpdateControllers();
         int.TryParse(gameObject.tag, out controller);
         controller -= 1;
 
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
                 direction.z = ControllerPluginWrapper.LeftStick_Y(controller);
             }
 
-            transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
+            transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0.00001f));
 
             //transform.Translate(direction * velocity * Time.deltaTime);
             if (transform.GetComponent<Rigidbody>().velocity.magnitude < 10.0f)
@@ -80,8 +81,14 @@ public class Player : MonoBehaviour
                 lookDirection.x = ControllerPluginWrapper.RightStick_X(controller);
                 lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
             }
-
-            transform.rotation = Quaternion.LookRotation(lookDirection);
+            if (lookDirection != new Vector3(0, 0, 0))
+            {
+                transform.rotation = Quaternion.LookRotation(lookDirection);
+            }
+            else
+            {
+              //  transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0.00001f));
+            }
         }
         else
         {
@@ -93,14 +100,10 @@ public class Player : MonoBehaviour
             GetComponent<Rigidbody>().velocity = dashDirection * velocity * 3;
         }
 
-        if (tag == "1")
-        {
-
-            Debug.Log(transform.forward);
-        }
-        ControllerPluginWrapper.RefreshStates();
 
         updatehpbar();
+
+        ControllerPluginWrapper.RefreshStates();
     }
 
     public void kill()
@@ -204,5 +207,34 @@ public class Player : MonoBehaviour
             }
         }
         dashing = false;
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "PickUp" && ControllerPluginWrapper.LStick_InDeadZone(controller))
+        {
+            GetComponent<PlayerSpells>().triggerGlobalCooldown();
+            //R1
+            if (ControllerPluginWrapper.GetButtonPressed(controller, 9))
+            {
+                Destroy(other.gameObject);
+            }
+
+            //L1
+            if (ControllerPluginWrapper.GetButtonPressed(controller, 8))
+            {
+                Destroy(other.gameObject);
+            }
+
+            if (ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f)
+            {
+                Destroy(other.gameObject);
+            }
+
+            if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f)
+            {
+                Destroy(other.gameObject);
+            }
+        }
     }
 }
