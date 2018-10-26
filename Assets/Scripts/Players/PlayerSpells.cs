@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ControllerInputs;
+using SoundEnginePluginWrapper;
 
 public class PlayerSpells : MonoBehaviour
 {
@@ -65,6 +66,8 @@ public class PlayerSpells : MonoBehaviour
 
 				fireballCooldown = fireballBaseCooldown;
 				cooldown = globalCooldown;
+
+				SoundEngineWrapper.PlayASound("fireball_shoot", 0, false, 10);
 			}
 
             //L1

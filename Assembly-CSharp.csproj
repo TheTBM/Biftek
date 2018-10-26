@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Events\Event.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
      <Compile Include="Assets\Scripts\Other\River.cs" />
+     <Compile Include="Assets\Scripts\Other\SoundEngine.cs" />
      <Compile Include="Assets\Scripts\Players\Player.cs" />
      <Compile Include="Assets\Scripts\Players\PlayerSpells.cs" />
      <Compile Include="Assets\Scripts\Players\SpawnManager.cs" />

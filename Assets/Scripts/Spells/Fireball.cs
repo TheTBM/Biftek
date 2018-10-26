@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class Fireball : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Fireball : MonoBehaviour
 	public int owner;
 	Player friendlyPlayer;
 	Player enemyPlayer;
+	private float flightSoundDelay;
 
 	public Fireball()
 	{
@@ -26,6 +28,7 @@ public class Fireball : MonoBehaviour
 		direction.Set(0, 0, 1);
 		damage = 2;
 		info = GetComponent<Info>();
+		flightSoundDelay = 0.6f;
 	}
 
 	// Update is called once per frame
@@ -35,11 +38,20 @@ public class Fireball : MonoBehaviour
 		if (lifeTime <= 0)
 		{
 			Destroy(gameObject);
+			SoundEngineWrapper.StopChannel(10);
+			SoundEngineWrapper.PlayASound("fireball_explode", 0, false, 10);
 		}
 
 		else
 		{
+			flightSoundDelay -= Time.deltaTime;
 			transform.Translate(direction * velocity * Time.deltaTime);
+
+			if (flightSoundDelay <= 0.0f)
+			{
+				SoundEngineWrapper.PlayASound("fireball_fly", 0, false, 10);
+				flightSoundDelay = 10.0f;
+			}
 		}
 	}
 
@@ -78,6 +90,8 @@ public class Fireball : MonoBehaviour
 			}
 
 			Destroy(gameObject);
+			SoundEngineWrapper.StopChannel(10);
+			SoundEngineWrapper.PlayASound("fireball_explode", 0, false, 10);
 		}
 		else
 		{
