@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SoundEnginePluginWrapper;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -40,7 +41,12 @@ public class SpawnManager : MonoBehaviour
         if (!initiated)
         {
             Initiate();
+			SoundEngineWrapper.Initialize();
+			SoundEngineWrapper.LoadSound("music", false, false, true);
+			SoundEngineWrapper.PlayASound("music", 0, false, 0);
         }
+
+		SoundEngineWrapper.UpdateSE();
 
         numAlive = 4;
 
@@ -96,4 +102,10 @@ public class SpawnManager : MonoBehaviour
 
         initiated = true;
     }
+
+	void OnApplicationQuit()
+	{
+		SoundEngineWrapper.StopAllChannels();
+		SoundEngineWrapper.UnloadSound("music");
+	}
 }
