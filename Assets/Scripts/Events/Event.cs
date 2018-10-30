@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SoundEnginePluginWrapper;
 
 namespace Events
 {
@@ -46,6 +47,11 @@ namespace Events
 			for (int i = 0; i < 4; i++)
 			{
 				players[i] = GameObject.FindGameObjectWithTag((i + 1).ToString());
+			}
+
+			if (!SoundEngineWrapper.IsPlaying(13))
+			{
+				SoundEngineWrapper.PlayASound("event_start", 0, false, 13);
 			}
 		}
 
@@ -113,6 +119,7 @@ namespace Events
 		public override void cleanup()
 		{
 			Destroy(copy);
+			SoundEngineWrapper.PlayASound("event_win", 0, false, 13);
 		}
 
 		public override bool finished()

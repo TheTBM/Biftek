@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class BubbleShield : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class BubbleShield : MonoBehaviour
 			Destroy(theBubble);
 		}
 
+		if (!SoundEngineWrapper.IsPlaying(14))
+		{
+			SoundEngineWrapper.PlayASound("shield_active", 0, false, 14);
+		}
+
 		theBubble.transform.SetPositionAndRotation(bubbleBlower.transform.position, bubbleBlower.transform.rotation);
 	}
 
@@ -49,5 +55,11 @@ public class BubbleShield : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
+	}
+
+	void OnDestroy()
+	{
+		SoundEngineWrapper.StopChannel(14);
+		SoundEngineWrapper.PlayASound("shield_deactivate", 0, false, 14);
 	}
 }

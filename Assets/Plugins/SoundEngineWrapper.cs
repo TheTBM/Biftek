@@ -22,6 +22,9 @@ namespace SoundEnginePluginWrapper
 		public static extern void UnloadSound(string name);
 
 		[DllImport(DLL_NAME)]
+		public static extern void UnloadAllSounds();
+
+		[DllImport(DLL_NAME)]
 		public static extern void Set3DListenerAttributes(int listenerID,
 			float posX, float posY, float posZ,
 			float velX, float velY, float velZ,
@@ -46,8 +49,8 @@ namespace SoundEnginePluginWrapper
 		[DllImport(DLL_NAME)]
 		public static extern void SetChannelVolume(int channelID, float volume);
 
-		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
-		public static extern System.IntPtr IsPlaying(int channel);
+		[DllImport(DLL_NAME)]
+		public static extern bool IsPlaying(int channel);
 
 		[DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
 		public static extern System.IntPtr DBToVolume(float dB);

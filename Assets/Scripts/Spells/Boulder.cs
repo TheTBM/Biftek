@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class Boulder : MonoBehaviour
 {
 	public int damage;
 	float scalingFactor;
+	float rollSoundDelay;
 	public float velocity;
 	public float lifetime;
 	public Vector3 direction;
@@ -17,13 +19,14 @@ public class Boulder : MonoBehaviour
 	Player enemyPlayer;
 
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
 		direction.Set(0, 0, 1);
 		info = GetComponent<Info>();
 		scalingFactor = 1.0f;
+		rollSoundDelay = 0.5f;
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -35,6 +38,14 @@ public class Boulder : MonoBehaviour
 
 		else
 		{
+			rollSoundDelay -= Time.deltaTime;
+
+			if (rollSoundDelay <= 0.0f)
+			{
+				SoundEngineWrapper.PlayASound("boulder_roll", 0, false, 12);
+				rollSoundDelay = 10.0f;
+			}
+
 			if (scalingFactor < 1.0f)
 			{
 				Destroy(gameObject);
@@ -109,5 +120,11 @@ public class Boulder : MonoBehaviour
 		{
 			scalingFactor -= otherInfo.getDamage();
 		}
+	}
+
+	void OnDestroy()
+	{
+		SoundEngineWrapper.StopChannel(12);
+		SoundEngineWrapper.PlayASound("boulder_crumble", 0, false, 12);
 	}
 }

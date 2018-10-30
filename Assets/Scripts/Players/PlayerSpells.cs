@@ -110,7 +110,9 @@ public class PlayerSpells : MonoBehaviour
                 copy.tag = player.tag;
                 setCooldown = bubbleshieldBaseCooldown;
                 cooldown = globalCooldown;
-                break;
+
+				SoundEngineWrapper.PlayASound("shield_activate", 0, false, 14);
+				break;
 
             case Spells.Boulder: // cast boulder spell
                 copy = Instantiate(Boulder, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
@@ -120,7 +122,9 @@ public class PlayerSpells : MonoBehaviour
 
                 setCooldown = boulderBaseCooldown;
                 cooldown = globalCooldown;
-                break;
+
+				SoundEngineWrapper.PlayASound("boulder_shoot", 0, false, 12);
+				break;
             case Spells.Dash: // cast dash spell
                 realPlayer.saveDirection();
                 realPlayer.dashing = true;
@@ -128,7 +132,9 @@ public class PlayerSpells : MonoBehaviour
 
                 setCooldown = dashBaseCooldown;
                 cooldown = globalCooldown;
-                break;
+
+				SoundEngineWrapper.PlayASound("player_dash", 0, false, 11);
+				break;
 
             default:
                 break;

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using ControllerInputs;
 using UnityEngine.UI;
+using SoundEnginePluginWrapper;
 
 public class Player : MonoBehaviour
 {
     //Player variables
     public int health;
+	int previousHealth;
     public int lives;
     public float velocity;
     Info info;
@@ -48,7 +50,12 @@ public class Player : MonoBehaviour
             initiate();
         }
 
-        if (info.getHealth() <= 0 && alive)
+		if ((previousHealth != info.getHealth()) && (info.getHealth() > 0))
+		{
+			SoundEngineWrapper.PlayASound("player_hurt", 0, false, 11);
+		}
+
+		if (info.getHealth() <= 0 && alive)
         {
             kill();
         }
@@ -109,6 +116,8 @@ public class Player : MonoBehaviour
         updatehpbar();
 
         ControllerPluginWrapper.RefreshStates();
+
+		previousHealth = info.getHealth();
     }
 
     public void kill()
@@ -120,9 +129,10 @@ public class Player : MonoBehaviour
         temp.a = 0.0f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
-    }
+		SoundEngineWrapper.PlayASound("player_die", 0, false, 11);
+	}
 
-    public void respawn(Material m, GameObject location)
+	public void respawn(Material m, GameObject location)
     {
         alive = true;
         info.setHealth(health);
@@ -131,7 +141,8 @@ public class Player : MonoBehaviour
         temp.a = 0.2f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
-    }
+		SoundEngineWrapper.PlayASound("player_respawn", 0, false, 11);
+	}
 
     public void saveDirection()
     {
@@ -187,6 +198,7 @@ public class Player : MonoBehaviour
         info.resetLives(lives);
         info.setPlayer(true);
         initiated = true;
+		previousHealth = info.getHealth();
     }
 
     void OnCollisionEnter(Collision other)
@@ -225,29 +237,33 @@ public class Player : MonoBehaviour
                 GetComponent<SpellInventory>().assignSpell(0, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(0);
                 Destroy(other.gameObject);
-            }
+				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+			}
 
-            //L1
-            if (ControllerPluginWrapper.GetButtonPressed(controller, 8))
+			//L1
+			if (ControllerPluginWrapper.GetButtonPressed(controller, 8))
             {
                 GetComponent<SpellInventory>().assignSpell(1, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(1);
                 Destroy(other.gameObject);
-            }
+				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+			}
 
-            if (ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f)
+			if (ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f)
             {
                 GetComponent<SpellInventory>().assignSpell(2, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(2);
                 Destroy(other.gameObject);
-            }
+				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+			}
 
-            if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f)
+			if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f)
             {
                 GetComponent<SpellInventory>().assignSpell(3, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(3);
                 Destroy(other.gameObject);
-            }
-        }
+				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+			}
+		}
     }
 }
