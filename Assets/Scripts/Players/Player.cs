@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public int lives;
     public float velocity;
     Info info;
+    SpellInventory spells;
     Vector3 direction;
     Vector3 lookDirection;
     Vector3 dashDirection;
@@ -29,9 +30,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         info = GetComponent<Info>();
+        spells = GetComponent<SpellInventory>();
         ControllerPluginWrapper.Initiate();
         deadPosition = new Vector3(0, -10, 0);
         alive = true;
+
+   
     }
 
     // Update is called once per frame
@@ -51,6 +55,7 @@ public class Player : MonoBehaviour
 
         int.TryParse(gameObject.tag, out controller);
         controller -= 1;
+        spells.AssignID(controller);
 
         if (!dashing)
         {
@@ -87,7 +92,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-              //  transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0.00001f));
+                //  transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0.00001f));
             }
         }
         else
@@ -217,22 +222,30 @@ public class Player : MonoBehaviour
             //R1
             if (ControllerPluginWrapper.GetButtonPressed(controller, 9))
             {
+                GetComponent<SpellInventory>().assignSpell(0, other.GetComponent<PickUp>().getSpell());
+                GetComponent<PlayerSpells>().resetSpellCooldown(0);
                 Destroy(other.gameObject);
             }
 
             //L1
             if (ControllerPluginWrapper.GetButtonPressed(controller, 8))
             {
+                GetComponent<SpellInventory>().assignSpell(1, other.GetComponent<PickUp>().getSpell());
+                GetComponent<PlayerSpells>().resetSpellCooldown(1);
                 Destroy(other.gameObject);
             }
 
             if (ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f)
             {
+                GetComponent<SpellInventory>().assignSpell(2, other.GetComponent<PickUp>().getSpell());
+                GetComponent<PlayerSpells>().resetSpellCooldown(2);
                 Destroy(other.gameObject);
             }
 
             if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f)
             {
+                GetComponent<SpellInventory>().assignSpell(3, other.GetComponent<PickUp>().getSpell());
+                GetComponent<PlayerSpells>().resetSpellCooldown(3);
                 Destroy(other.gameObject);
             }
         }

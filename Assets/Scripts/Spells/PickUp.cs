@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    public enum SpellName
-    {
-        Empty, Fireball, Shield, Boulder, Dash
-    }
-
-    private SpellName spellName = SpellName.Empty;
+    private Spells spellName = Spells.Empty;
 
     public Sprite Fireball, Shield, Boulder, Dash;
 
@@ -18,26 +13,26 @@ public class PickUp : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        int num = Random.Range(1, 4);
+        int num = Random.Range(1, 5);
 
         switch (num)
         {
             case 1:
-                spellName = SpellName.Fireball;
+                spellName = Spells.Fireball;
                 GetComponentInChildren<SpriteRenderer>().sprite = Fireball;
                 break;
             case 2:
-                spellName = SpellName.Shield;
+                spellName = Spells.Bubbleshield;
                 GetComponentInChildren<SpriteRenderer>().sprite = Shield;
                 break;
 
             case 3:
-                spellName = SpellName.Boulder;
+                spellName = Spells.Boulder;
                 GetComponentInChildren<SpriteRenderer>().sprite = Boulder;
                 break;
 
             case 4:
-                spellName = SpellName.Dash;
+                spellName = Spells.Dash;
                 GetComponentInChildren<SpriteRenderer>().sprite = Dash;
                 break;
 
@@ -55,6 +50,11 @@ public class PickUp : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         
+    }
+
+    public Spells getSpell()
+    {
+        return spellName;
     }
 
     void OnDestroy()
