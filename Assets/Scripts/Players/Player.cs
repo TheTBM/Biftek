@@ -29,8 +29,14 @@ public class Player : MonoBehaviour
     public Material dead;
     Vector3 deadPosition;
 
-    // Use this for initialization
-    void Start()
+	public ParticleSystem dashingEmitter;
+	private ParticleSystem deCopy;
+
+	public ParticleSystem pickupEmitter;
+	private ParticleSystem peCopy;
+
+	// Use this for initialization
+	void Start()
     {
         info = GetComponent<Info>();
         spells = GetComponent<SpellInventory>();
@@ -111,7 +117,9 @@ public class Player : MonoBehaviour
                 lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
             }
             GetComponent<Rigidbody>().velocity = dashDirection * velocity * 3;
-        }
+
+			SyncEmitters();
+		}
 
 
         updatehpbar();
@@ -234,10 +242,28 @@ public class Player : MonoBehaviour
                 otherInfo.takeDamage(1);
             }
         }
-        dashing = false;
-    }
 
-    void OnTriggerStay(Collider other)
+        dashing = false;
+		StopDashEmitter();
+	}
+
+	public void StartDashEmitter()
+	{
+		deCopy = Instantiate(dashingEmitter, transform.position, transform.rotation * new Quaternion(0, -1, 0, 0)) as ParticleSystem;
+	}
+
+	public void StopDashEmitter()
+	{
+		deCopy.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+		deCopy.GetComponent<GeneralEmitter>().KillEmitter();
+	}
+
+	private void SyncEmitters()
+	{
+		deCopy.transform.SetPositionAndRotation(transform.position, transform.rotation * new Quaternion(0, 1, 0, 0));
+	}
+
+	void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "PickUp" && ControllerPluginWrapper.LStick_InDeadZone(controller))
         {
@@ -248,6 +274,8 @@ public class Player : MonoBehaviour
                 GetComponent<SpellInventory>().assignSpell(0, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(0);
                 Destroy(other.gameObject);
+				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
+				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
 				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
 			}
 
@@ -257,6 +285,8 @@ public class Player : MonoBehaviour
                 GetComponent<SpellInventory>().assignSpell(1, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(1);
                 Destroy(other.gameObject);
+				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
+				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
 				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
 			}
 
@@ -265,6 +295,8 @@ public class Player : MonoBehaviour
                 GetComponent<SpellInventory>().assignSpell(2, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(2);
                 Destroy(other.gameObject);
+				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
+				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
 				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
 			}
 
@@ -273,6 +305,8 @@ public class Player : MonoBehaviour
                 GetComponent<SpellInventory>().assignSpell(3, other.GetComponent<PickUp>().getSpell());
                 GetComponent<PlayerSpells>().resetSpellCooldown(3);
                 Destroy(other.gameObject);
+				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
+				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
 				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
 			}
 		}

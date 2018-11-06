@@ -170,6 +170,10 @@ MonoBehaviour:
   fireDamageTimer: 0
   dashing: 0
   dead: {fileID: 2100000, guid: 97edc11468cdd184bbd561e7883c7b16, type: 2}
+  dashingEmitter: {fileID: 198467778382459808, guid: 7ff2d812d749af74fabbe031850697aa,
+    type: 2}
+  pickupEmitter: {fileID: 198942227604538152, guid: 7dc4507d6a205ff42ab218fbf3901225,
+    type: 2}
 --- !u!114 &114498403931500414
 MonoBehaviour:
   m_ObjectHideFlags: 1

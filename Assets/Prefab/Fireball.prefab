@@ -119,6 +119,10 @@ MonoBehaviour:
   lifeTime: 5
   direction: {x: 0, y: 0, z: 0}
   owner: 0
+  travelEmitter: {fileID: 198649633776057236, guid: 58105f75796a9dd4ba2c1590bd885210,
+    type: 2}
+  explodeEmitter: {fileID: 1109138436022344, guid: e64a60e051983a44487541b7168e9e66,
+    type: 2}
 --- !u!114 &114979436481667298
 MonoBehaviour:
   m_ObjectHideFlags: 1

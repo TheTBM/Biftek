@@ -116,6 +116,8 @@ MonoBehaviour:
   health: 2
   lifeTime: 5
   theBubble: {fileID: 1419322748420584}
+  activeEmitter: {fileID: 198404153016299038, guid: a11ba3c5a8b653b40ad1913b654bd4cc,
+    type: 2}
 --- !u!114 &114847106180087950
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -54,6 +54,7 @@ public class PlayerSpells : MonoBehaviour
 			if (currentlyDashing <= 0.0f)
 			{
 				realPlayer.dashing = false;
+				realPlayer.StopDashEmitter();
 			}
 		}
 
@@ -137,6 +138,7 @@ public class PlayerSpells : MonoBehaviour
                 cooldown = globalCooldown;
 
 				SoundEngineWrapper.PlayASound("player_dash", 0, false, 11);
+				realPlayer.StartDashEmitter();
 				break;
 
             case Spells.Lightning: // cast lightning spell

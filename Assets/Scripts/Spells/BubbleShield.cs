@@ -12,6 +12,9 @@ public class BubbleShield : MonoBehaviour
 	private Info info;
 	bool initiated = false;
 
+	public ParticleSystem activeEmitter;
+	private ParticleSystem aeCopy;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -19,6 +22,9 @@ public class BubbleShield : MonoBehaviour
 		bubbleBlower = GameObject.FindGameObjectWithTag(theBubble.tag);
 		Physics.IgnoreCollision(bubbleBlower.GetComponent<Collider>(), theBubble.GetComponent<Collider>());
 		info = GetComponent<Info>();
+
+		activeEmitter.GetComponent<SeekBehaviour>().target = transform;
+		aeCopy = Instantiate(activeEmitter, transform.position, transform.rotation) as ParticleSystem;
 	}
 	
 	// Update is called once per frame
@@ -41,6 +47,7 @@ public class BubbleShield : MonoBehaviour
 		}
 
 		theBubble.transform.SetPositionAndRotation(bubbleBlower.transform.position, bubbleBlower.transform.rotation);
+		SyncEmitters();
 	}
 
 	public void initiate()
@@ -57,9 +64,15 @@ public class BubbleShield : MonoBehaviour
 		}
 	}
 
+	void SyncEmitters()
+	{
+		aeCopy.transform.SetPositionAndRotation(transform.position, transform.rotation);
+	}
+
 	void OnDestroy()
 	{
 		SoundEngineWrapper.StopChannel(14);
 		SoundEngineWrapper.PlayASound("shield_deactivate", 0, false, 14);
+		Destroy(aeCopy);
 	}
 }

@@ -18,6 +18,11 @@ public class Boulder : MonoBehaviour
 	Player friendlyPlayer;
 	Player enemyPlayer;
 
+	public ParticleSystem travelEmitter;
+	public GameObject crumbleEmitter;
+	private ParticleSystem teCopy;
+	private GameObject ceCopy;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -25,6 +30,7 @@ public class Boulder : MonoBehaviour
 		info = GetComponent<Info>();
 		scalingFactor = 1.0f;
 		rollSoundDelay = 0.5f;
+		teCopy = Instantiate(travelEmitter, transform.position, transform.rotation * new Quaternion(-1, 0, 0, 0)) as ParticleSystem;
 	}
 
 	// Update is called once per frame
@@ -61,12 +67,19 @@ public class Boulder : MonoBehaviour
 			gameObject.transform.localScale = new Vector3(scalingFactor, scalingFactor, scalingFactor);
 
 			transform.Translate(direction * (velocity * (scalingFactor * 0.5f)) * Time.deltaTime);
+
+			SyncEmitters();
 		}
 	}
 
 	public int getDamage()
 	{
 		return damage;
+	}
+
+	void SyncEmitters()
+	{
+		teCopy.transform.SetPositionAndRotation(transform.position - new Vector3(0, 0.5f * scalingFactor, 0), transform.rotation * new Quaternion(-1, 0, 0, 0));
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -126,5 +139,11 @@ public class Boulder : MonoBehaviour
 	{
 		SoundEngineWrapper.StopChannel(12);
 		SoundEngineWrapper.PlayASound("boulder_crumble", 0, false, 12);
+
+		teCopy.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+		teCopy.GetComponent<GeneralEmitter>().KillEmitter();
+
+		ceCopy = Instantiate(crumbleEmitter, transform.position, transform.rotation) as GameObject;
+		ceCopy.GetComponent<GeneralEmitter>().KillEmitter();
 	}
 }

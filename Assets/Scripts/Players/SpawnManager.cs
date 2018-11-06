@@ -29,8 +29,12 @@ public class SpawnManager : MonoBehaviour
 
     bool initiated = false;
 
-    // Use this for initialization
-    void Start()
+	public ParticleSystem spawnEmitter;
+
+	private ParticleSystem[] seCopies = new ParticleSystem[4];
+
+	// Use this for initialization
+	void Start()
     {
 
     }
@@ -62,6 +66,8 @@ public class SpawnManager : MonoBehaviour
 				if (players[i].getRespawnTimer() <= 0.0f)
 				{
 					players[i].respawn(playerMaterials[i], spawns[i]);
+					seCopies[i] = Instantiate(spawnEmitter, spawns[i].transform.position, spawns[i].transform.rotation) as ParticleSystem;
+					seCopies[i].GetComponent<GeneralEmitter>().KillEmitter();
 				}
 			}
 		}

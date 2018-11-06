@@ -17,6 +17,11 @@ public class Fireball : MonoBehaviour
 	Player enemyPlayer;
 	private float flightSoundDelay;
 
+	public ParticleSystem travelEmitter;
+	public GameObject explodeEmitter;
+	private ParticleSystem teCopy;
+	private GameObject eeCopy;
+
 	public Fireball()
 	{
 		damage = 2;
@@ -29,6 +34,8 @@ public class Fireball : MonoBehaviour
 		damage = 2;
 		info = GetComponent<Info>();
 		flightSoundDelay = 0.6f;
+
+		teCopy = Instantiate(travelEmitter, transform) as ParticleSystem;
 	}
 
 	// Update is called once per frame
@@ -53,6 +60,13 @@ public class Fireball : MonoBehaviour
 				flightSoundDelay = 10.0f;
 			}
 		}
+
+		SyncEmitters();
+	}
+
+	void SyncEmitters()
+	{
+		teCopy.transform.SetPositionAndRotation(transform.position, transform.rotation);
 	}
 
 	public int getDamage()
@@ -97,5 +111,11 @@ public class Fireball : MonoBehaviour
 		{
 			Physics.IgnoreCollision(GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
 		}
+	}
+
+	void OnDestroy()
+	{
+		eeCopy = Instantiate(explodeEmitter, transform.position, transform.rotation) as GameObject;
+		eeCopy.GetComponent<GeneralEmitter>().KillEmitter();
 	}
 }

@@ -118,6 +118,10 @@ MonoBehaviour:
   lifetime: 4
   direction: {x: 0, y: 0, z: 0}
   owner: 0
+  travelEmitter: {fileID: 198354749961134034, guid: a6bce6464c823854088140a339641e84,
+    type: 2}
+  crumbleEmitter: {fileID: 1738764481095788, guid: ca9cc80bbeb81704daa5dcc09c450c8f,
+    type: 2}
 --- !u!114 &114798213950895330
 MonoBehaviour:
   m_ObjectHideFlags: 1
