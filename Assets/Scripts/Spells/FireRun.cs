@@ -7,7 +7,7 @@ public class FireRun : MonoBehaviour
     public GameObject Fire;
     public float cooldown;
     public int damage;
-    public int speedBonus;
+    public float speedBonus;
     public float lifeTime;
     private Info info;
     private Info otherInfo;
@@ -30,20 +30,26 @@ public class FireRun : MonoBehaviour
     void Update()
     {
         lifeTime -= Time.deltaTime; // reduce duration remaining on FireRun
-        transform.position = parentPlayer.transform.position; // update location to the player location
+        //transform.position = parentPlayer.transform.position; // update location to the player location
 
         if (lifeTime <= 0)
         {
-            Destroy(gameObject);
+            if (GetComponentsInChildren<Fire>().Length == 0)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        if ((transform.position - lastFirePosition).magnitude > 1)
+        if (lifeTime > 0)
         {
-            // spawn a fire here
-            summonFire();
+            if ((parentPlayer.transform.position - lastFirePosition).magnitude > 1)
+            {
+                // spawn a fire here
+                summonFire();
+            }
+            parentPlayer.GetComponent<Player>().addSpeed(speedBonus);
         }
 
-        parentPlayer.GetComponent<Rigidbody>().velocity *= (speedBonus * 1.01f);
     }
 
     public void damageEnemy(Player enemy)
@@ -64,9 +70,12 @@ public class FireRun : MonoBehaviour
 
     private void summonFire()
     {
-        copy = Instantiate(Fire, transform.position + transform.forward * 1.75f, transform.rotation) as GameObject;
+        copy = Instantiate(Fire, parentPlayer.transform.position, transform.rotation) as GameObject;
 
         Fire fire = copy.GetComponent<Fire>();
         fire.owner = owner;
+        fire.transform.parent = this.transform;
+
+        lastFirePosition = fire.transform.position;
     }
 }

@@ -6,16 +6,14 @@ public class PickUp : MonoBehaviour
 {
     private Spells spellName = Spells.Empty;
 
-    public Sprite Fireball, Shield, Boulder, Dash, Lightning, Hailstorm, FireRun;
+    public Sprite Fireball, Shield, Boulder, Dash, Lightning, Hailstorm, FireRun, EarthWall;
 
     public int spawnLocation;
 
 	// Use this for initialization
 	void Start ()
     {
-        GetComponent<MeshRenderer>().enabled = false;
-
-        int num = Random.Range(1, 8);
+        int num = Random.Range(1, 9);
 
         switch (num)
         {
@@ -53,21 +51,15 @@ public class PickUp : MonoBehaviour
                 GetComponentInChildren<SpriteRenderer>().sprite = FireRun;
                 break;
 
+            case 8:
+                spellName = Spells.EarthWall;
+                GetComponentInChildren<SpriteRenderer>().sprite = EarthWall;
+                break;
+
             default:
                 break;
         }
 
-    }
-
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
-    void OnCollisionEnter(Collision other)
-    {
-        
     }
 
     public Spells getSpell()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hailstorm : MonoBehaviour
 {
-    public int slowPercent;
+    public float slowPercent;
     public float cooldown;
     public float velocity;
     public float lifeTime;
@@ -48,16 +48,13 @@ public class Hailstorm : MonoBehaviour
         }
     }
 
-    public int getSlow()
+    public float getSlow()
     {
         return slowPercent;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerStay(Collider other)
     {
-        //Physics.IgnoreCollision(GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
-
-        //info.setDamage(damage);
         if (other.gameObject.GetComponent<Info>() != null)
         {
             otherInfo = other.gameObject.GetComponent<Info>();
@@ -66,7 +63,7 @@ public class Hailstorm : MonoBehaviour
             {
                 enemyPlayer = other.gameObject.GetComponent<Player>();
 
-                other.transform.GetComponent<Rigidbody>().velocity = other.transform.GetComponent<Rigidbody>().velocity * (float)(100.0f - getSlow() / 100.0f);
+                enemyPlayer.addSlow(getSlow());
             }
         }
     }

@@ -16,11 +16,15 @@ public class Fire : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerStay(Collider other)
     {
+        Debug.Log("Fire stuff");
         if (other.gameObject.GetComponent<Player>() != null)
         {
-            if (other.gameObject != GameObject.FindGameObjectWithTag(owner.ToString()))
+            int id;
+            int.TryParse(other.gameObject.tag, out id);
+
+            if (owner != id)
             {
                 GetComponentInParent<FireRun>().damageEnemy(other.gameObject.GetComponent<Player>());
             }

@@ -9,7 +9,7 @@ public class SpellInventory : MonoBehaviour
     private int id;
     Image[] spellImage = new Image[4];
    
-    public Sprite Empty, fireball, bubbleShield, boulder, dash, lightning, hailstorm, firerun;
+    public Sprite Empty, fireball, bubbleShield, boulder, dash, lightning, hailstorm, firerun, earthwall;
    
     void Start()
     {
@@ -17,7 +17,7 @@ public class SpellInventory : MonoBehaviour
         {
             SpellInventoryPlugin.assignSpell(i, 0, Spells.Fireball);
             SpellInventoryPlugin.assignSpell(i, 1, Spells.Bubbleshield);
-            SpellInventoryPlugin.assignSpell(i, 2, Spells.Empty);
+            SpellInventoryPlugin.assignSpell(i, 2, Spells.FireRun);
             SpellInventoryPlugin.assignSpell(i, 3, Spells.Empty);
 
             int temp = i + 1;
@@ -76,6 +76,10 @@ public class SpellInventory : MonoBehaviour
 
             case Spells.FireRun:
                 spellImage[spellslot].sprite = firerun;
+                break;
+
+            case Spells.EarthWall:
+                spellImage[spellslot].sprite = earthwall;
                 break;
 
            default:

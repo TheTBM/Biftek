@@ -13,6 +13,7 @@ public class PlayerSpells : MonoBehaviour
     public GameObject Lightning;
     public GameObject Hailstorm;
     public GameObject FireRun;
+    public GameObject EarthWall;
 
 	Player realPlayer;
 	GameObject copy;
@@ -142,9 +143,9 @@ public class PlayerSpells : MonoBehaviour
 				break;
 
             case Spells.Lightning: // cast lightning spell
-                copy = Instantiate(Lightning, player.transform.position + player.transform.forward, player.transform.rotation) as GameObject;
+                copy = Instantiate(Lightning, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
-                Lightning lightning = copy.GetComponent<Lightning>();
+                LightningParent lightning = copy.GetComponent<LightningParent>();
                 lightning.owner = controller + 1;
 
                 setCooldown = lightning.cooldown;
@@ -162,7 +163,7 @@ public class PlayerSpells : MonoBehaviour
                 break;
 
             case Spells.EarthWall:
-                copy = Instantiate(Hailstorm, player.transform.position + player.transform.forward * 4.0f, player.transform.rotation) as GameObject;
+                copy = Instantiate(EarthWall, player.transform.position + player.transform.forward * 4.0f, player.transform.rotation) as GameObject;
 
                 Wall earthwall = copy.GetComponent<Wall>();
                 earthwall.owner = controller + 1;

@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private float respawnTimer;
     public float fireDamageTimer = 0;
 
+    private float speedModifier = 1.0f;
+
     bool alive;
     public bool dashing;
 
@@ -85,15 +87,18 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 0.00001f));
 
             //transform.Translate(direction * velocity * Time.deltaTime);
-            if (transform.GetComponent<Rigidbody>().velocity.magnitude < 10.0f)
+            if (transform.GetComponent<Rigidbody>().velocity.magnitude < 10.0f * speedModifier)
             {
-                transform.GetComponent<Rigidbody>().AddForce(direction * Mathf.Pow(velocity, 2));
+                transform.GetComponent<Rigidbody>().AddForce(direction * Mathf.Pow(velocity * speedModifier, 2));
             }
 
-            if (transform.GetComponent<Rigidbody>().velocity.magnitude > 10.0f)
+            if (transform.GetComponent<Rigidbody>().velocity.magnitude > 10.0f * speedModifier)
             {
-                transform.GetComponent<Rigidbody>().velocity = transform.GetComponent<Rigidbody>().velocity.normalized * 10.0f;
+                transform.GetComponent<Rigidbody>().velocity = transform.GetComponent<Rigidbody>().velocity.normalized * speedModifier * 10.0f;
             }
+
+            //slow and speed buff added to player
+            resetSpeed();
 
             if (!ControllerPluginWrapper.RStick_InDeadZone(controller))
             {
@@ -116,9 +121,10 @@ public class Player : MonoBehaviour
                 lookDirection.x = ControllerPluginWrapper.RightStick_X(controller);
                 lookDirection.z = ControllerPluginWrapper.RightStick_Y(controller);
             }
+
             GetComponent<Rigidbody>().velocity = dashDirection * velocity * 3;
 
-			SyncEmitters();
+            SyncEmitters();
 		}
 
 
@@ -152,6 +158,22 @@ public class Player : MonoBehaviour
         gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
 		SoundEngineWrapper.PlayASound("player_respawn", 0, false, 11);
 	}
+
+    void resetSpeed()
+    {
+        speedModifier = 1.0f;
+    }
+
+    public void addSlow(float slow)
+    {
+        speedModifier -= speedModifier * slow;
+    }
+
+    public void addSpeed(float speed)
+    {
+        speedModifier += speedModifier * speed;
+        Debug.Log(speedModifier);
+    }
 
     public void saveDirection()
     {
