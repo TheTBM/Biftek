@@ -5,11 +5,11 @@ using SoundEnginePluginWrapper;
 
 public class Fireball : MonoBehaviour
 {
+    public float cooldown;
 	public int damage;
 	public float velocity;
 	public float lifeTime;
 	public Vector3 direction;
-	public Collision collision;
 	private Info info;
 	private Info otherInfo;
 	public int owner;

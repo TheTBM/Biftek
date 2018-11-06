@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     bool initiated = false;
     int controller;
     int points;
-    public float respawnTimer;
+    private float respawnTimer;
+    public float fireDamageTimer = 0;
 
     bool alive;
     public bool dashing;
@@ -36,8 +37,6 @@ public class Player : MonoBehaviour
         ControllerPluginWrapper.Initiate();
         deadPosition = new Vector3(0, -10, 0);
         alive = true;
-
-   
     }
 
     // Update is called once per frame
@@ -63,6 +62,8 @@ public class Player : MonoBehaviour
         int.TryParse(gameObject.tag, out controller);
         controller -= 1;
         spells.AssignID(controller);
+
+        fireDamageTimer += Time.deltaTime;
 
         if (!dashing)
         {
@@ -199,6 +200,16 @@ public class Player : MonoBehaviour
         info.setPlayer(true);
         initiated = true;
 		previousHealth = info.getHealth();
+    }
+
+    public float getFireDamageTimer()
+    {
+        return fireDamageTimer;
+    }
+
+    public void resetFireDamageTimer()
+    {
+        fireDamageTimer = 0.0f;
     }
 
     void OnCollisionEnter(Collision other)

@@ -10,13 +10,16 @@ public class PlayerSpells : MonoBehaviour
 	public GameObject Fireball;
 	public GameObject BubbleShield;
 	public GameObject Boulder;
+    public GameObject Lightning;
+    public GameObject Hailstorm;
+    public GameObject FireRun;
 
 	Player realPlayer;
 	GameObject copy;
 	Vector3 Aim;
 
 	public const float globalCooldown = 0.5f;
-    public const float fireballBaseCooldown = 1.0f;
+
     public const float bubbleshieldBaseCooldown = 6.0f;
 	public const float boulderBaseCooldown = 5.0f;
 	public const float dashBaseCooldown = 3.0f;
@@ -99,7 +102,7 @@ public class PlayerSpells : MonoBehaviour
                 Fireball fireball = copy.GetComponent<Fireball>();
                 fireball.owner = controller + 1;
 
-                setCooldown = fireballBaseCooldown;
+                setCooldown = fireball.cooldown;
                 cooldown = globalCooldown;
 
                 SoundEngineWrapper.PlayASound("fireball_shoot", 0, false, 10);
@@ -135,6 +138,46 @@ public class PlayerSpells : MonoBehaviour
 
 				SoundEngineWrapper.PlayASound("player_dash", 0, false, 11);
 				break;
+
+            case Spells.Lightning: // cast lightning spell
+                copy = Instantiate(Lightning, player.transform.position + player.transform.forward, player.transform.rotation) as GameObject;
+
+                Lightning lightning = copy.GetComponent<Lightning>();
+                lightning.owner = controller + 1;
+
+                setCooldown = lightning.cooldown;
+                cooldown = globalCooldown;
+                break;
+
+            case Spells.Hailstorm: // cast hailstorm spell
+                copy = Instantiate(Hailstorm, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+
+                Hailstorm hailstorm = copy.GetComponent<Hailstorm>();
+                hailstorm.owner = controller + 1;
+
+                setCooldown = hailstorm.cooldown;
+                cooldown = globalCooldown;
+                break;
+
+            case Spells.EarthWall:
+                copy = Instantiate(Hailstorm, player.transform.position + player.transform.forward * 4.0f, player.transform.rotation) as GameObject;
+
+                Wall earthwall = copy.GetComponent<Wall>();
+                earthwall.owner = controller + 1;
+
+                setCooldown = earthwall.cooldown;
+                cooldown = globalCooldown;
+                break;
+
+            case Spells.FireRun:
+                copy = Instantiate(FireRun, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+
+                FireRun firerun = copy.GetComponent<FireRun>();
+                firerun.owner = controller + 1;
+
+                setCooldown = firerun.cooldown;
+                cooldown = globalCooldown;
+                break;
 
             default:
                 break;

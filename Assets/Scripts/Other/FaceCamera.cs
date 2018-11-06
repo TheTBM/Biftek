@@ -8,5 +8,6 @@ public class FaceCamera : MonoBehaviour {
 	void Update ()
     {
         transform.LookAt(Camera.main.transform.position, -Vector3.right);
+        gameObject.transform.Rotate(Vector3.forward * 90);
     }
 }

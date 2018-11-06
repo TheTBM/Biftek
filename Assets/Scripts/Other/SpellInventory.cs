@@ -9,13 +9,8 @@ public class SpellInventory : MonoBehaviour
     private int id;
     Image[] spellImage = new Image[4];
    
-    public Sprite Empty;
-    public Sprite fireball;
-    public Sprite bubbleShield;
-    public Sprite boulder;
-    public Sprite dash;
+    public Sprite Empty, fireball, bubbleShield, boulder, dash, lightning, hailstorm, firerun;
    
-
     void Start()
     {
         for (int i = 0; i < 4; i++)
@@ -49,8 +44,6 @@ public class SpellInventory : MonoBehaviour
         int temp = id + 1;
         spellImage = GameObject.Find("Player" + temp + "UI").GetComponentsInChildren<Image>();
 
-
-
        switch (newSpell)
        {
            case Spells.Empty:
@@ -72,7 +65,19 @@ public class SpellInventory : MonoBehaviour
            case Spells.Dash:
                spellImage[spellslot].sprite = dash;
                break;
-       
+
+            case Spells.Lightning:
+                spellImage[spellslot].sprite = lightning;
+                break;
+
+            case Spells.Hailstorm:
+                spellImage[spellslot].sprite = hailstorm;
+                break;
+
+            case Spells.FireRun:
+                spellImage[spellslot].sprite = firerun;
+                break;
+
            default:
                break;
        }

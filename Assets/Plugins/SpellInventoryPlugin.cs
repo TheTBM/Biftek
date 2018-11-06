@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 public enum Spells
 {
-    Empty, Fireball, Boulder, Dash, Bubbleshield
+    Empty, Fireball, Boulder, Dash, Bubbleshield, Lightning, Hailstorm, EarthWall, FireRun
 }
 
 namespace SpellInventoryManager
