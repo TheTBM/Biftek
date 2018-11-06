@@ -16,7 +16,7 @@ public class Fire : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<Player>() != null)
         {

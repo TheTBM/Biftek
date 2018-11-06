@@ -140,9 +140,9 @@ public class PlayerSpells : MonoBehaviour
 				break;
 
             case Spells.Lightning: // cast lightning spell
-                copy = Instantiate(Lightning, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(Lightning, player.transform.position + player.transform.forward, player.transform.rotation) as GameObject;
 
-                LightningParent lightning = copy.GetComponent<LightningParent>();
+                Lightning lightning = copy.GetComponent<Lightning>();
                 lightning.owner = controller + 1;
 
                 setCooldown = lightning.cooldown;

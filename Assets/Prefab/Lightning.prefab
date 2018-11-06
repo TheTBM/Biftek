@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4424977866971210}
-  - component: {fileID: 114249580144672068}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -40,7 +39,7 @@ GameObject:
   - component: {fileID: 65038978525433928}
   - component: {fileID: 114135784536716230}
   - component: {fileID: 114867402310891628}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Shot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +59,7 @@ GameObject:
   - component: {fileID: 65119116828977416}
   - component: {fileID: 114299533212070296}
   - component: {fileID: 114840535273565598}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Shot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +79,7 @@ GameObject:
   - component: {fileID: 65650659950378460}
   - component: {fileID: 114923657783504160}
   - component: {fileID: 114116854211877686}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Shot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,8 +274,8 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357666453061414}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -287,8 +286,8 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663717931913864}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -299,8 +298,8 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1885753313251612}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -315,7 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb97d7a62e286df43a7d2cc3daafa595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
   damage: 1
+  lifeTime: 0
+  owner: 0
 --- !u!114 &114135784536716230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,20 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c4ba25d55c33914fb3f7edcdacda0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114249580144672068
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1044526760882836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f84d9f28c7136c47a1e21e862130d29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 0.1
-  cooldown: 1
-  owner: 0
 --- !u!114 &114299533212070296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,7 +351,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb97d7a62e286df43a7d2cc3daafa595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
   damage: 1
+  lifeTime: 0
+  owner: 0
 --- !u!114 &114867402310891628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,7 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb97d7a62e286df43a7d2cc3daafa595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 0
   damage: 1
+  lifeTime: 0
+  owner: 0
 --- !u!114 &114923657783504160
 MonoBehaviour:
   m_ObjectHideFlags: 1

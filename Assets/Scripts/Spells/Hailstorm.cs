@@ -53,8 +53,11 @@ public class Hailstorm : MonoBehaviour
         return slowPercent;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
+        //Physics.IgnoreCollision(GetComponent<Collider>(), other.gameObject.GetComponent<Collider>());
+
+        //info.setDamage(damage);
         if (other.gameObject.GetComponent<Info>() != null)
         {
             otherInfo = other.gameObject.GetComponent<Info>();

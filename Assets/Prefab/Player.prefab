@@ -151,9 +151,8 @@ MonoBehaviour:
   boulder: {fileID: 21300000, guid: 5354c68354d24034e98a51d9f4a79dc5, type: 3}
   dash: {fileID: 21300000, guid: 6db807bbe34fe7a439f64620f9b18717, type: 3}
   lightning: {fileID: 21300000, guid: 309117f414ba9b8448e6a796acbe70d6, type: 3}
-  hailstorm: {fileID: 21300000, guid: b0340bc94cece3d4ba1e7fa952479e38, type: 3}
-  firerun: {fileID: 21300000, guid: 7658b7f7b523013438daed055ed9935d, type: 3}
-  earthwall: {fileID: 21300000, guid: 1d70e35f2a7a51049b5d58ba1a1253c2, type: 3}
+  hailstorm: {fileID: 0}
+  firerun: {fileID: 0}
 --- !u!114 &114179011491404438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,8 +198,8 @@ MonoBehaviour:
     type: 2}
   Boulder: {fileID: 1389893013423608, guid: 578d453acce4ece48a40f27bb4a244bd, type: 2}
   Lightning: {fileID: 1044526760882836, guid: b2f35472b0ce01246a35f60f7a76f268, type: 2}
-  Hailstorm: {fileID: 1863242347456154, guid: 2062c7dc6d974d7478225cb0923d4e72, type: 2}
-  FireRun: {fileID: 1541989776191854, guid: 9ece0b47065f78a478bcd709f1f8c969, type: 2}
+  Hailstorm: {fileID: 0}
+  FireRun: {fileID: 0}
 --- !u!136 &136611846877567124
 CapsuleCollider:
   m_ObjectHideFlags: 1
