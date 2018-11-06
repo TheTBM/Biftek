@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23706828192280894}
   - component: {fileID: 136319079278170192}
   - component: {fileID: 114831499984218062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hailstorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863242347456154}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

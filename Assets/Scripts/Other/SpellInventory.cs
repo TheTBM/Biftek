@@ -9,7 +9,7 @@ public class SpellInventory : MonoBehaviour
     private int id;
     Image[] spellImage = new Image[4];
    
-    public Sprite Empty, fireball, bubbleShield, boulder, dash, lightning, hailstorm, firerun;
+    public Sprite Empty, fireball, bubbleShield, boulder, dash, lightning, hailstorm, firerun, earthwall;
    
     void Start()
     {
@@ -76,6 +76,10 @@ public class SpellInventory : MonoBehaviour
 
             case Spells.FireRun:
                 spellImage[spellslot].sprite = firerun;
+                break;
+
+            case Spells.EarthWall:
+                spellImage[spellslot].sprite = earthwall;
                 break;
 
            default:

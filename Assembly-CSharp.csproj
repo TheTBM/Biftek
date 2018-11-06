@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Spells\FireRun.cs" />
      <Compile Include="Assets\Scripts\Spells\Hailstorm.cs" />
      <Compile Include="Assets\Scripts\Spells\Lightning.cs" />
+     <Compile Include="Assets\Scripts\Spells\LightningParent.cs" />
      <Compile Include="Assets\Scripts\Spells\Wall.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/100622907/Documents/GitHub/Biftek/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
