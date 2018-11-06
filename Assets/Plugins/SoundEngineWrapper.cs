@@ -25,6 +25,10 @@ namespace SoundEnginePluginWrapper
 		public static extern void UnloadAllSounds();
 
 		[DllImport(DLL_NAME)]
+		public static extern void ClearQueue();
+
+
+[DllImport(DLL_NAME)]
 		public static extern void Set3DListenerAttributes(int listenerID,
 			float posX, float posY, float posZ,
 			float velX, float velY, float velZ,
@@ -62,9 +66,12 @@ namespace SoundEnginePluginWrapper
 		public static extern void SetSound3DMinMaxDistance(string name, float min, float max);
 
 		[DllImport(DLL_NAME)]
-		public static extern void PlayASound(string name, int channelGroup, bool paused, int channelID);
+		public static extern void QueueSound(string name, int channelGroup, bool paused, int channelID);
 
 		[DllImport(DLL_NAME)]
+		public static extern void SetNumSoundsToPlay(int num);
+
+[DllImport(DLL_NAME)]
 		public static extern void SetChannel3DAttributes(int channelID,
 			float posX, float posY, float posZ,
 			float velX, float velY, float velZ,

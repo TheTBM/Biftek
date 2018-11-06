@@ -107,7 +107,7 @@ public class PlayerSpells : MonoBehaviour
                 setCooldown = fireball.cooldown;
                 cooldown = globalCooldown;
 
-                SoundEngineWrapper.PlayASound("fireball_shoot", 0, false, 10);
+                SoundEngineWrapper.QueueSound("fireball_shoot", 0, false, 10);
                 break;
                
             case Spells.Bubbleshield: // cast bubble shield spell
@@ -116,7 +116,7 @@ public class PlayerSpells : MonoBehaviour
                 setCooldown = bubbleshieldBaseCooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("shield_activate", 0, false, 14);
+				SoundEngineWrapper.QueueSound("shield_activate", 0, false, 14);
 				break;
 
             case Spells.Boulder: // cast boulder spell
@@ -128,7 +128,7 @@ public class PlayerSpells : MonoBehaviour
                 setCooldown = boulderBaseCooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("boulder_shoot", 0, false, 12);
+				SoundEngineWrapper.QueueSound("boulder_shoot", 0, false, 12);
 				break;
             case Spells.Dash: // cast dash spell
                 realPlayer.saveDirection();
@@ -138,7 +138,7 @@ public class PlayerSpells : MonoBehaviour
                 setCooldown = dashBaseCooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("player_dash", 0, false, 11);
+				SoundEngineWrapper.QueueSound("player_dash", 0, false, 11);
 				realPlayer.StartDashEmitter();
 				break;
 

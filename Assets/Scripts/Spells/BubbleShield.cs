@@ -43,7 +43,7 @@ public class BubbleShield : MonoBehaviour
 
 		if (!SoundEngineWrapper.IsPlaying(14))
 		{
-			SoundEngineWrapper.PlayASound("shield_active", 0, false, 14);
+			SoundEngineWrapper.QueueSound("shield_active", 0, false, 14);
 		}
 
 		theBubble.transform.SetPositionAndRotation(bubbleBlower.transform.position, bubbleBlower.transform.rotation);
@@ -72,7 +72,7 @@ public class BubbleShield : MonoBehaviour
 	void OnDestroy()
 	{
 		SoundEngineWrapper.StopChannel(14);
-		SoundEngineWrapper.PlayASound("shield_deactivate", 0, false, 14);
+		SoundEngineWrapper.QueueSound("shield_deactivate", 0, false, 14);
 		Destroy(aeCopy);
 	}
 }

@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
 		if ((previousHealth != info.getHealth()) && (info.getHealth() > 0))
 		{
-			SoundEngineWrapper.PlayASound("player_hurt", 0, false, 11);
+			SoundEngineWrapper.QueueSound("player_hurt", 0, false, 11);
 		}
 
 		if (info.getHealth() <= 0 && alive)
@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         temp.a = 0.0f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
-		SoundEngineWrapper.PlayASound("player_die", 0, false, 11);
+		SoundEngineWrapper.QueueSound("player_die", 0, false, 11);
 	}
 
 	public void respawn(Material m, GameObject location)
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         temp.a = 0.2f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
-		SoundEngineWrapper.PlayASound("player_respawn", 0, false, 11);
+		SoundEngineWrapper.QueueSound("player_respawn", 0, false, 11);
 	}
 
     void resetSpeed()
@@ -298,7 +298,7 @@ public class Player : MonoBehaviour
                 Destroy(other.gameObject);
 				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
 				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
-				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+				SoundEngineWrapper.QueueSound("player_pickup", 0, false, 11);
 			}
 
 			//L1
@@ -309,7 +309,7 @@ public class Player : MonoBehaviour
                 Destroy(other.gameObject);
 				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
 				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
-				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+				SoundEngineWrapper.QueueSound("player_pickup", 0, false, 11);
 			}
 
 			if (ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f)
@@ -319,7 +319,7 @@ public class Player : MonoBehaviour
                 Destroy(other.gameObject);
 				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
 				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
-				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+				SoundEngineWrapper.QueueSound("player_pickup", 0, false, 11);
 			}
 
 			if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f)
@@ -329,7 +329,7 @@ public class Player : MonoBehaviour
                 Destroy(other.gameObject);
 				peCopy = Instantiate(pickupEmitter, other.transform.position - new Vector3(1, 0, 0), other.transform.rotation) as ParticleSystem;
 				peCopy.GetComponent<GeneralEmitter>().KillEmitter();
-				SoundEngineWrapper.PlayASound("player_pickup", 0, false, 11);
+				SoundEngineWrapper.QueueSound("player_pickup", 0, false, 11);
 			}
 		}
     }

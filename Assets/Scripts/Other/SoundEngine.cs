@@ -38,6 +38,7 @@ public class SoundEngine : MonoBehaviour
 	void OnApplicationQuit()
 	{
 		SoundEngineWrapper.StopAllChannels();
+		SoundEngineWrapper.ClearQueue();
 		SoundEngineWrapper.UnloadAllSounds();
 	}
 }
