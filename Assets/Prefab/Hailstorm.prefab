@@ -49,7 +49,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863242347456154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -102,6 +102,8 @@ MonoBehaviour:
   lifeTime: 7
   direction: {x: 0, y: 0, z: 0}
   owner: 0
+  hailEmitter: {fileID: 198039901413370868, guid: de91082578b893a4a8b9089a82fb0225,
+    type: 2}
 --- !u!136 &136319079278170192
 CapsuleCollider:
   m_ObjectHideFlags: 1

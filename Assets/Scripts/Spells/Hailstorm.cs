@@ -14,14 +14,20 @@ public class Hailstorm : MonoBehaviour
     public int owner;
     Player friendlyPlayer;
     Player enemyPlayer;
-    //private float flightSoundDelay;
+	//private float flightSoundDelay;
+
+	public ParticleSystem hailEmitter;
+	private ParticleSystem heCopy;
 
     // Use this for initialization
     void Start()
     {
         direction.Set(0, 0, 1);
         info = GetComponent<Info>();
-        //flightSoundDelay = 0.6f;
+		//flightSoundDelay = 0.6f;
+
+		heCopy = Instantiate(hailEmitter, transform.position + ((-transform.forward * 0.25f) - transform.right), transform.rotation) as ParticleSystem;
+		heCopy.GetComponent<GeneralEmitter>().KillEmitter();
     }
 
     // Update is called once per frame
@@ -40,6 +46,8 @@ public class Hailstorm : MonoBehaviour
             //flightSoundDelay -= Time.deltaTime;
             transform.Translate(direction * velocity * Time.deltaTime);
 
+			SyncEmitters();
+
             //if (flightSoundDelay <= 0.0f)
             //{
             //    SoundEngineWrapper.PlayASound("fireball_fly", 0, false, 10);
@@ -52,6 +60,11 @@ public class Hailstorm : MonoBehaviour
     {
         return slowPercent;
     }
+
+	private void SyncEmitters()
+	{
+		heCopy.transform.SetPositionAndRotation(transform.position + ((-transform.forward * 0.25f) - transform.right), transform.rotation);
+	}
 
     void OnTriggerStay(Collider other)
     {

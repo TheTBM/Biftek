@@ -27,6 +27,8 @@ public class SoundEngine : MonoBehaviour
 		SoundEngineWrapper.LoadSound("shield_active", false, false, true);
 		SoundEngineWrapper.LoadSound("shield_deactivate", false, false, true);
 		//SoundEngineWrapper.PlayASound("music", 0, false, 0);
+
+		SoundEngineWrapper.SetNumSoundsToPlay(5);
 	}
 	
 	// Update is called once per frame

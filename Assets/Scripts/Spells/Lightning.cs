@@ -24,8 +24,6 @@ public class Lightning : MonoBehaviour
     void Start()
     {
         damage = 1;
-        info = GetComponent<Info>();
-        canHit[GetComponentInParent<LightningParent>().owner - 1] = false;
     }
 
     public int getDamage()

@@ -318,6 +318,8 @@ MonoBehaviour:
   cooldown: 3
   lifeTime: 0.1
   owner: 0
+  castEmitter: {fileID: 1937371648870280, guid: 0b5f489effacae44aa0a507c4358e11d,
+    type: 2}
 --- !u!114 &114116854211877686
 MonoBehaviour:
   m_ObjectHideFlags: 1

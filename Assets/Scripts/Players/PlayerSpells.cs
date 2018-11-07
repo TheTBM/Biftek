@@ -147,6 +147,7 @@ public class PlayerSpells : MonoBehaviour
 
                 LightningParent lightning = copy.GetComponent<LightningParent>();
                 lightning.owner = controller + 1;
+				lightning.PlayEmitter();
 
                 setCooldown = lightning.cooldown;
                 cooldown = globalCooldown;

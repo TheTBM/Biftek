@@ -141,3 +141,6 @@ MonoBehaviour:
   lifeTime: 10
   owner: 0
   initiated: 0
+  spawnEmitter: {fileID: 1514588839992958, guid: d0b2eaac49bc9a74cbcb79bf28ffebd3,
+    type: 2}
+  dieEmitter: {fileID: 1430947737949264, guid: c1809742592a1014385d66b8c78369e0, type: 2}

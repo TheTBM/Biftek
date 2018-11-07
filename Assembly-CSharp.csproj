@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\Dynamic.cs" />
      <Compile Include="Assets\Scripts\Emitter\GeneralEmitter.cs" />
+     <Compile Include="Assets\Scripts\Emitter\GeneralEmitter3.cs" />
      <Compile Include="Assets\Scripts\Emitter\SeekBehaviour.cs" />
      <Compile Include="Assets\Scripts\Events\Event.cs" />
      <Compile Include="Assets\Scripts\Events\EventManager.cs" />
