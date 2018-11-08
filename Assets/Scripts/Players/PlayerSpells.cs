@@ -3,133 +3,141 @@ using System.Collections.Generic;
 using UnityEngine;
 using ControllerInputs;
 using SoundEnginePluginWrapper;
+using UnityEngine.UI;
 
 public class PlayerSpells : MonoBehaviour
 {
-	public GameObject player;
-	public GameObject Fireball;
-	public GameObject BubbleShield;
-	public GameObject Boulder;
-    public GameObject Lightning;
-    public GameObject Hailstorm;
-    public GameObject FireRun;
-    public GameObject EarthWall;
+    public GameObject player;
+    public GameObject FireballPrefab;
+    public GameObject BubbleShieldPrefab;
+    public GameObject BoulderPrefab;
+    public GameObject LightningPrefab;
+    public GameObject HailstormPrefab;
+    public GameObject FireRunPrefab;
+    public GameObject EarthWallPrefab;
 
-	Player realPlayer;
-	GameObject copy;
-	Vector3 Aim;
+    private Image spellCD;
+    private float currentSpellCD;
 
-	public const float globalCooldown = 0.5f;
+    Player realPlayer;
+    GameObject copy;
+    Vector3 Aim;
 
-    public const float bubbleshieldBaseCooldown = 6.0f;
-	public const float boulderBaseCooldown = 5.0f;
-	public const float dashBaseCooldown = 3.0f;
+    public const float globalCooldown = 0.5f;
 
-	float cooldown;
+    public const float dashBaseCooldown = 3.0f;
+
+    float cooldown;
     float spell1Cooldown;
     float spell2Cooldown;
-	float spell3Cooldown;
-	float spell4Cooldown;
-	int controller;
+    float spell3Cooldown;
+    float spell4Cooldown;
+    int controller;
 
-	float currentlyDashing;
-	float maxDashTimer = 0.5f;
+    float currentlyDashing;
+    float maxDashTimer = 0.5f;
 
-	// Use this for initialization
-	void Start ()
-	{
-		realPlayer = player.GetComponent<Player>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		ControllerPluginWrapper.UpdateControllers();
-		int.TryParse(player.tag, out controller);
-		controller -= 1;
+    // Use this for initialization
+    void Start()
+    {
+        realPlayer = player.GetComponent<Player>();
+    }
 
-		if (realPlayer.dashing)
-		{
-			currentlyDashing -= Time.deltaTime;
+    // Update is called once per frame
+    void Update()
+    {
+        ControllerPluginWrapper.UpdateControllers();
+        int.TryParse(player.tag, out controller);
+        controller -= 1;
 
-			if (currentlyDashing <= 0.0f)
-			{
-				realPlayer.dashing = false;
-				realPlayer.StopDashEmitter();
-			}
-		}
+        if (realPlayer.dashing)
+        {
+            currentlyDashing -= Time.deltaTime;
 
-		else if (cooldown <= 0)
-		{
+            if (currentlyDashing <= 0.0f)
+            {
+                realPlayer.dashing = false;
+                realPlayer.StopDashEmitter();
+            }
+        }
+
+        else if (cooldown <= 0)
+        {
             //R1
-			if (ControllerPluginWrapper.GetButtonPressed(controller, 9) && spell1Cooldown <= 0.0f)
-			{
+            if (ControllerPluginWrapper.GetButtonPressed(controller, 9) && spell1Cooldown <= 0.0f)
+            {
                 castSpell(GetComponent<SpellInventory>().castSpell(0), ref spell1Cooldown);
-			}
+            }
             //L1
-			else if (ControllerPluginWrapper.GetButtonPressed(controller, 8) && spell2Cooldown <= 0.0f)
-			{
+            else if (ControllerPluginWrapper.GetButtonPressed(controller, 8) && spell2Cooldown <= 0.0f)
+            {
                 castSpell(GetComponent<SpellInventory>().castSpell(1), ref spell2Cooldown);
             }
-			else if ((ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f) && (spell3Cooldown <= 0.0f))
-			{
+            else if ((ControllerPluginWrapper.LeftTrigger(controller) >= 0.3f) && (spell3Cooldown <= 0.0f))
+            {
                 castSpell(GetComponent<SpellInventory>().castSpell(2), ref spell3Cooldown);
             }
-			else if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f && spell4Cooldown <= 0.0f)
-			{
+            else if (ControllerPluginWrapper.RightTrigger(controller) >= 0.3f && spell4Cooldown <= 0.0f)
+            {
                 castSpell(GetComponent<SpellInventory>().castSpell(3), ref spell4Cooldown);
             }
-		}
+        }
 
         cooldown -= Time.deltaTime;
         spell1Cooldown -= Time.deltaTime;
         spell2Cooldown -= Time.deltaTime;
-		spell3Cooldown -= Time.deltaTime;
-		currentlyDashing -= Time.deltaTime;
-		spell4Cooldown -= Time.deltaTime;
+        spell3Cooldown -= Time.deltaTime;
+        currentlyDashing -= Time.deltaTime;
+        spell4Cooldown -= Time.deltaTime;
 
-		ControllerPluginWrapper.RefreshStates();
+       for (int i = 0; i < 4; i++)
+       {
+           spellCooldownUpdate(GetComponent<SpellInventory>().castSpell(i), i);
+       }
+
+
+        ControllerPluginWrapper.RefreshStates();
     }
 
     void castSpell(Spells cast, ref float setCooldown)
     {
-        switch(cast)
+        switch (cast)
         {
             case Spells.Empty:// if you don't have a spell in this slot
 
                 break;
             case Spells.Fireball: // cast fireball spell
-                copy = Instantiate(Fireball, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(FireballPrefab, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
                 Fireball fireball = copy.GetComponent<Fireball>();
                 fireball.owner = controller + 1;
 
-                setCooldown = fireball.cooldown;
+                setCooldown = Fireball.cooldown;
                 cooldown = globalCooldown;
 
-                SoundEngineWrapper.PlayASound("fireball_shoot", 0, false, 10);
+                SoundEngineWrapper.QueueSound("fireball_shoot", 0, false, 10);
                 break;
-               
+
             case Spells.Bubbleshield: // cast bubble shield spell
-                copy = Instantiate(BubbleShield, player.transform.position, player.transform.rotation) as GameObject;
+                copy = Instantiate(BubbleShieldPrefab, player.transform.position, player.transform.rotation) as GameObject;
                 copy.tag = player.tag;
-                setCooldown = bubbleshieldBaseCooldown;
+                setCooldown = BubbleShield.cooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("shield_activate", 0, false, 14);
-				break;
+                SoundEngineWrapper.QueueSound("shield_activate", 0, false, 14);
+                break;
 
             case Spells.Boulder: // cast boulder spell
-                copy = Instantiate(Boulder, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(BoulderPrefab, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
                 Boulder boulder = copy.GetComponent<Boulder>();
                 boulder.owner = controller + 1;
 
-                setCooldown = boulderBaseCooldown;
+                setCooldown = Boulder.cooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("boulder_shoot", 0, false, 12);
-				break;
+                SoundEngineWrapper.QueueSound("boulder_shoot", 0, false, 12);
+                break;
             case Spells.Dash: // cast dash spell
                 realPlayer.saveDirection();
                 realPlayer.dashing = true;
@@ -138,47 +146,47 @@ public class PlayerSpells : MonoBehaviour
                 setCooldown = dashBaseCooldown;
                 cooldown = globalCooldown;
 
-				SoundEngineWrapper.PlayASound("player_dash", 0, false, 11);
-				realPlayer.StartDashEmitter();
-				break;
+                SoundEngineWrapper.QueueSound("player_dash", 0, false, 11);
+                realPlayer.StartDashEmitter();
+                break;
 
             case Spells.Lightning: // cast lightning spell
-                copy = Instantiate(Lightning, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(LightningPrefab, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
                 LightningParent lightning = copy.GetComponent<LightningParent>();
                 lightning.owner = controller + 1;
 
-                setCooldown = lightning.cooldown;
+                setCooldown = LightningParent.cooldown;
                 cooldown = globalCooldown;
                 break;
 
             case Spells.Hailstorm: // cast hailstorm spell
-                copy = Instantiate(Hailstorm, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(HailstormPrefab, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
                 Hailstorm hailstorm = copy.GetComponent<Hailstorm>();
                 hailstorm.owner = controller + 1;
 
-                setCooldown = hailstorm.cooldown;
+                setCooldown = Hailstorm.cooldown;
                 cooldown = globalCooldown;
                 break;
 
             case Spells.EarthWall:
-                copy = Instantiate(EarthWall, player.transform.position + player.transform.forward * 4.0f, player.transform.rotation) as GameObject;
+                copy = Instantiate(EarthWallPrefab, player.transform.position + player.transform.forward * 4.0f, player.transform.rotation) as GameObject;
 
                 Wall earthwall = copy.GetComponent<Wall>();
                 earthwall.owner = controller + 1;
 
-                setCooldown = earthwall.cooldown;
+                setCooldown = Wall.cooldown;
                 cooldown = globalCooldown;
                 break;
 
             case Spells.FireRun:
-                copy = Instantiate(FireRun, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
+                copy = Instantiate(FireRunPrefab, player.transform.position + player.transform.forward * 1.75f, player.transform.rotation) as GameObject;
 
                 FireRun firerun = copy.GetComponent<FireRun>();
                 firerun.owner = controller + 1;
 
-                setCooldown = firerun.cooldown;
+                setCooldown = FireRun.cooldown;
                 cooldown = globalCooldown;
                 break;
 
@@ -187,9 +195,94 @@ public class PlayerSpells : MonoBehaviour
         }
     }
 
+    private void spellCooldownUpdate(Spells cast, int spellslot)
+    {
+        string userTag = gameObject.tag;
+        
+        spellCD = GameObject.Find("Player" + userTag + "UI").GetComponentsInChildren<Image>()[spellslot + 4];
+
+        switch (spellslot)
+        {
+            case 0:
+                currentSpellCD = spell1Cooldown;
+                break;
+
+            case 1:
+                currentSpellCD = spell2Cooldown;
+                break;
+
+            case 2:
+                currentSpellCD = spell3Cooldown;
+                break;
+
+            case 3:
+                currentSpellCD = spell4Cooldown;
+                break;
+
+            default:
+                break;
+        }
+
+        if (currentSpellCD <= 0.0f && cooldown > 0.0f && cast != Spells.Empty)
+        {
+            spellCD.fillAmount = cooldown / globalCooldown;
+        }
+        else
+        {
+            switch (cast)
+            {
+                case Spells.Empty:// if you don't have a spell in this slot
+                    spellCD.fillAmount = 0;
+
+                    break;
+                case Spells.Fireball: // cast fireball spell
+                    spellCD.fillAmount = currentSpellCD / Fireball.cooldown;
+
+                    break;
+
+                case Spells.Bubbleshield: // cast bubble shield spell
+                    spellCD.fillAmount = currentSpellCD / BubbleShield.cooldown;
+
+                    break;
+
+                case Spells.Boulder: // cast boulder spell
+                    spellCD.fillAmount = currentSpellCD / Boulder.cooldown;
+
+                    break;
+                case Spells.Dash: // cast dash spell
+                    spellCD.fillAmount = currentSpellCD / dashBaseCooldown;
+
+                    break;
+
+                case Spells.Lightning: // cast lightning spell
+                    spellCD.fillAmount = currentSpellCD / LightningParent.cooldown;
+
+                    break;
+
+                case Spells.Hailstorm: // cast hailstorm spell
+                    spellCD.fillAmount = currentSpellCD / Hailstorm.cooldown;
+
+                    break;
+
+                case Spells.EarthWall:
+                    spellCD.fillAmount = currentSpellCD / Wall.cooldown;
+
+                    break;
+
+                case Spells.FireRun:
+                    spellCD.fillAmount = currentSpellCD / FireRun.cooldown;
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
     public void resetSpellCooldown(int spell)
     {
-        switch(spell)
+        switch (spell)
         {
             case 0:
                 spell1Cooldown = 0;
@@ -203,7 +296,7 @@ public class PlayerSpells : MonoBehaviour
             case 3:
                 spell4Cooldown = 0;
                 break;
-            
+
             default:
                 break;
         }

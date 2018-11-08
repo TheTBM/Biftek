@@ -51,7 +51,7 @@ namespace Events
 
 			if (!SoundEngineWrapper.IsPlaying(13))
 			{
-				SoundEngineWrapper.PlayASound("event_start", 0, false, 13);
+				SoundEngineWrapper.QueueSound("event_start", 0, false, 13);
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace Events
 		public override void cleanup()
 		{
 			Destroy(copy);
-			SoundEngineWrapper.PlayASound("event_win", 0, false, 13);
+			SoundEngineWrapper.QueueSound("event_win", 0, false, 13);
 		}
 
 		public override bool finished()

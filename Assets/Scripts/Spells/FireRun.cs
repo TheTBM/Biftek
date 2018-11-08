@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireRun : MonoBehaviour
 {
     public GameObject Fire;
-    public float cooldown;
+    public static float cooldown = 10;
     public int damage;
     public float speedBonus;
     public float lifeTime;

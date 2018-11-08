@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hailstorm : MonoBehaviour
 {
     public float slowPercent;
-    public float cooldown;
+    public static float cooldown = 10;
     public float velocity;
     public float lifeTime;
     public Vector3 direction;

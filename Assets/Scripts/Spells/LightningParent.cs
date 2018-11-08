@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightningParent : MonoBehaviour
 {
-    public float cooldown;
+    public static float cooldown = 3;
     public float lifeTime;
     public int owner;
 	

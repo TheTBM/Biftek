@@ -91,6 +91,16 @@ public class SpellSpawn : MonoBehaviour
         return false;
     }
 
+    public float getCurrCooldown()
+    {
+        return currCooldown;
+    }
+
+    public void setCurrCooldown(float incoming)
+    {
+        currCooldown = incoming;
+    }
+
     //void Initiate()
     //{
     //

@@ -17,7 +17,7 @@ public class SpellInventory : MonoBehaviour
         {
             SpellInventoryPlugin.assignSpell(i, 0, Spells.Fireball);
             SpellInventoryPlugin.assignSpell(i, 1, Spells.Bubbleshield);
-            SpellInventoryPlugin.assignSpell(i, 2, Spells.FireRun);
+            SpellInventoryPlugin.assignSpell(i, 2, Spells.Empty);
             SpellInventoryPlugin.assignSpell(i, 3, Spells.Empty);
 
             int temp = i + 1;

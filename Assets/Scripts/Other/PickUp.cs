@@ -70,5 +70,10 @@ public class PickUp : MonoBehaviour
     void OnDestroy()
     {
         GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().setSpawnFreeTrue(spawnLocation);
+
+        if (GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().getCurrCooldown() <= 0.0f)
+        {
+            GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().setCurrCooldown(1.0f);
+        }
     }
 }

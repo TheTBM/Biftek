@@ -198,14 +198,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1484570212574272}
-  Fireball: {fileID: 1235442579122440, guid: ae2a2c43eccbb4f42a6cd20da0d374cc, type: 2}
-  BubbleShield: {fileID: 1419322748420584, guid: 963cb3f7f657c7a479c0f6d9c1310d75,
+  FireballPrefab: {fileID: 1235442579122440, guid: ae2a2c43eccbb4f42a6cd20da0d374cc,
     type: 2}
-  Boulder: {fileID: 1389893013423608, guid: 578d453acce4ece48a40f27bb4a244bd, type: 2}
-  Lightning: {fileID: 1044526760882836, guid: b2f35472b0ce01246a35f60f7a76f268, type: 2}
-  Hailstorm: {fileID: 1863242347456154, guid: 2062c7dc6d974d7478225cb0923d4e72, type: 2}
-  FireRun: {fileID: 1541989776191854, guid: 9ece0b47065f78a478bcd709f1f8c969, type: 2}
-  EarthWall: {fileID: 1671358853154648, guid: 486bc4e385e9610409f281b46fc7252b, type: 2}
+  BubbleShieldPrefab: {fileID: 1419322748420584, guid: 963cb3f7f657c7a479c0f6d9c1310d75,
+    type: 2}
+  BoulderPrefab: {fileID: 1389893013423608, guid: 578d453acce4ece48a40f27bb4a244bd,
+    type: 2}
+  LightningPrefab: {fileID: 1044526760882836, guid: b2f35472b0ce01246a35f60f7a76f268,
+    type: 2}
+  HailstormPrefab: {fileID: 1863242347456154, guid: 2062c7dc6d974d7478225cb0923d4e72,
+    type: 2}
+  FireRunPrefab: {fileID: 1541989776191854, guid: 9ece0b47065f78a478bcd709f1f8c969,
+    type: 2}
+  EarthWallPrefab: {fileID: 1671358853154648, guid: 486bc4e385e9610409f281b46fc7252b,
+    type: 2}
 --- !u!136 &136611846877567124
 CapsuleCollider:
   m_ObjectHideFlags: 1

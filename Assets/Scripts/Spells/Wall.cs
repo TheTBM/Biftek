@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     public int health;
-    public float cooldown;
+    public static float cooldown = 10;
     public float lifeTime;
     private Info info;
     public int owner;

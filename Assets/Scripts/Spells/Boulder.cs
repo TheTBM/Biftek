@@ -5,6 +5,7 @@ using SoundEnginePluginWrapper;
 
 public class Boulder : MonoBehaviour
 {
+    public static float cooldown = 5;
 	public int damage;
 	float scalingFactor;
 	float rollSoundDelay;
@@ -48,7 +49,7 @@ public class Boulder : MonoBehaviour
 
 			if (rollSoundDelay <= 0.0f)
 			{
-				SoundEngineWrapper.PlayASound("boulder_roll", 0, false, 12);
+				SoundEngineWrapper.QueueSound("boulder_roll", 0, false, 12);
 				rollSoundDelay = 10.0f;
 			}
 
@@ -138,7 +139,7 @@ public class Boulder : MonoBehaviour
 	void OnDestroy()
 	{
 		SoundEngineWrapper.StopChannel(12);
-		SoundEngineWrapper.PlayASound("boulder_crumble", 0, false, 12);
+		SoundEngineWrapper.QueueSound("boulder_crumble", 0, false, 12);
 
 		teCopy.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 		teCopy.GetComponent<GeneralEmitter>().KillEmitter();

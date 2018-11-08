@@ -5,7 +5,7 @@ using SoundEnginePluginWrapper;
 
 public class Fireball : MonoBehaviour
 {
-    public float cooldown;
+    public static float cooldown = 1.0f;
 	public int damage;
 	public float velocity;
 	public float lifeTime;
@@ -46,7 +46,7 @@ public class Fireball : MonoBehaviour
 		{
 			Destroy(gameObject);
 			SoundEngineWrapper.StopChannel(10);
-			SoundEngineWrapper.PlayASound("fireball_explode", 0, false, 10);
+			SoundEngineWrapper.QueueSound("fireball_explode", 0, false, 10);
 		}
 
 		else
@@ -56,7 +56,7 @@ public class Fireball : MonoBehaviour
 
 			if (flightSoundDelay <= 0.0f)
 			{
-				SoundEngineWrapper.PlayASound("fireball_fly", 0, false, 10);
+				SoundEngineWrapper.QueueSound("fireball_fly", 0, false, 10);
 				flightSoundDelay = 10.0f;
 			}
 		}
@@ -105,7 +105,7 @@ public class Fireball : MonoBehaviour
 
 			Destroy(gameObject);
 			SoundEngineWrapper.StopChannel(10);
-			SoundEngineWrapper.PlayASound("fireball_explode", 0, false, 10);
+			SoundEngineWrapper.QueueSound("fireball_explode", 0, false, 10);
 		}
 		else
 		{
