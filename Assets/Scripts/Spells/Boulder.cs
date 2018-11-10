@@ -5,7 +5,11 @@ using SoundEnginePluginWrapper;
 
 public class Boulder : MonoBehaviour
 {
+<<<<<<< HEAD
     public static float cooldown = 5;
+=======
+	public static float cooldown = 5;
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c
 	public int damage;
 	float scalingFactor;
 	float rollSoundDelay;

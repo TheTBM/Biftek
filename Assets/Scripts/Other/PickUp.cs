@@ -59,7 +59,6 @@ public class PickUp : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     public Spells getSpell()
@@ -71,9 +70,17 @@ public class PickUp : MonoBehaviour
     {
         GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().setSpawnFreeTrue(spawnLocation);
 
+<<<<<<< HEAD
         if (GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().getCurrCooldown() <= 0.0f)
         {
             GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().setCurrCooldown(1.0f);
         }
     }
+=======
+		if (GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().getCurrCooldown() <= 0.0f)
+		{
+			GameObject.Find("Spell Spawn Manager").GetComponent<SpellSpawn>().setCurrCooldown(1.0f);
+		}
+	}
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c
 }

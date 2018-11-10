@@ -91,6 +91,7 @@ public class SpellSpawn : MonoBehaviour
         return false;
     }
 
+<<<<<<< HEAD
     public float getCurrCooldown()
     {
         return currCooldown;
@@ -105,4 +106,15 @@ public class SpellSpawn : MonoBehaviour
     //{
     //
     //}
+=======
+	public float getCurrCooldown()
+	{
+		return currCooldown;
+	}
+
+	public void setCurrCooldown(float incoming)
+	{
+		currCooldown = incoming;
+	}
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c
 }

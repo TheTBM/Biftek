@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sprites/Lizard_Portrait.png.meta
 guid: 7376519d186713243a38d4aeb312c7dd
+=======
+guid: bd3804151aad75e4cbd3a324a68729a1
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c:Assets/Sprites/Lizard_Portrait.png.meta
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -75,7 +79,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD:Assets/Sprites/Lizard_Portrait.png.meta
     spriteID: 77917d2b43f19a44394fd382fc600b22
+=======
+    spriteID: 4bac85de48ef48e4eb27933d7ee32562
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c:Assets/Sprites/Lizard_Portrait.png.meta
     vertices: []
     indices: 
     edges: []

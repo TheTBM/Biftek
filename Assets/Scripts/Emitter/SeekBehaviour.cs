@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class was written with the help of the following youtube video
+//https://www.youtube.com/watch?v=KsT_ZyTv1ms
+
 public class SeekBehaviour : MonoBehaviour
 {
 	public Transform target;

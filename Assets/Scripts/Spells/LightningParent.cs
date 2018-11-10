@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class LightningParent : MonoBehaviour
 {
+<<<<<<< HEAD
     public static float cooldown = 3;
     public float lifeTime;
+=======
+	public static float cooldown = 3;
+	public float lifeTime;
+>>>>>>> 110a58946bc9913bad69f66d44c0ebaf6754e24c
     public int owner;
-	
+
+	public GameObject castEmitter;
+	private GameObject ceCopy;
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -15,18 +23,12 @@ public class LightningParent : MonoBehaviour
         if (lifeTime <= 0)
         {
             Destroy(gameObject);
-            //SoundEngineWrapper.StopChannel(10);
-            //SoundEngineWrapper.PlayASound("fireball_explode", 0, false, 10);
-        }
-        else
-        {
-            //flightSoundDelay -= Time.deltaTime;
-
-            //if (flightSoundDelay <= 0.0f)
-            //{
-            //    SoundEngineWrapper.PlayASound("fireball_fly", 0, false, 10);
-            //    flightSoundDelay = 10.0f;
-            //}
-        }
+		}
     }
+
+	public void PlayEmitter()
+	{
+		ceCopy = Instantiate(castEmitter, transform.position - (transform.forward * 2), transform.rotation) as GameObject;
+		ceCopy.GetComponent<GeneralEmitter3>().KillEmitters();
+	}
 }
