@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class Hailstorm : MonoBehaviour
 {
     public float slowPercent;
-    public float cooldown;
-    public float velocity;
+	public static float cooldown = 10;
+	public float velocity;
     public float lifeTime;
     public Vector3 direction;
     private Info info;
@@ -80,4 +81,9 @@ public class Hailstorm : MonoBehaviour
             }
         }
     }
+
+	void OnDestroy()
+	{
+		SoundEngineWrapper.StopChannel(19);
+	}
 }

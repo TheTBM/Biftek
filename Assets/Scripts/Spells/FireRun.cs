@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class FireRun : MonoBehaviour
 {
     public GameObject Fire;
-    public float cooldown;
+    public static float cooldown = 10;
     public int damage;
     public float speedBonus;
     public float lifeTime;
@@ -24,6 +25,7 @@ public class FireRun : MonoBehaviour
         info = GetComponent<Info>();
         parentPlayer = GameObject.FindGameObjectWithTag(owner.ToString());
         lastFirePosition = new Vector3(0, 0, -100);
+		SoundEngineWrapper.QueueSound("firerun_alive", 0, false, 22);
     }
 
     // Update is called once per frame
@@ -37,7 +39,8 @@ public class FireRun : MonoBehaviour
             if (GetComponentsInChildren<Fire>().Length == 0)
             {
                 Destroy(gameObject);
-            }
+				SoundEngineWrapper.StopChannel(22);
+			}
         }
 
         if (lifeTime > 0)
@@ -70,7 +73,7 @@ public class FireRun : MonoBehaviour
 
     private void summonFire()
     {
-        copy = Instantiate(Fire, parentPlayer.transform.position, transform.rotation) as GameObject;
+        copy = Instantiate(Fire, parentPlayer.transform.position + new Vector3(0, 1.46f, 0), transform.rotation) as GameObject;
 
         Fire fire = copy.GetComponent<Fire>();
         fire.owner = owner;

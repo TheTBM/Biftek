@@ -5,6 +5,7 @@ using SoundEnginePluginWrapper;
 
 public class BubbleShield : MonoBehaviour
 {
+	public static float cooldown = 6;
 	public int health;
 	public float lifeTime;
 	public GameObject theBubble;
@@ -24,7 +25,7 @@ public class BubbleShield : MonoBehaviour
 		info = GetComponent<Info>();
 
 		activeEmitter.GetComponent<SeekBehaviour>().target = transform;
-		aeCopy = Instantiate(activeEmitter, transform.position, transform.rotation) as ParticleSystem;
+		aeCopy = Instantiate(activeEmitter, transform.position + new Vector3(0, 1.46f, 0), transform.rotation) as ParticleSystem;
 	}
 	
 	// Update is called once per frame
@@ -46,7 +47,7 @@ public class BubbleShield : MonoBehaviour
 			SoundEngineWrapper.QueueSound("shield_active", 0, false, 14);
 		}
 
-		theBubble.transform.SetPositionAndRotation(bubbleBlower.transform.position, bubbleBlower.transform.rotation);
+		theBubble.transform.SetPositionAndRotation(bubbleBlower.transform.position + new Vector3(0, 1.46f, 0), bubbleBlower.transform.rotation);
 		SyncEmitters();
 	}
 

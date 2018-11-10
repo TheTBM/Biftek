@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
         ControllerPluginWrapper.Initiate();
         deadPosition = new Vector3(0, -10, 0);
         alive = true;
+		respawnTimer = 5.0f;
     }
 
     // Update is called once per frame
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
 
 		if ((previousHealth != info.getHealth()) && (info.getHealth() > 0))
 		{
-			SoundEngineWrapper.QueueSound("player_hurt", 0, false, 11);
+			//SoundEngineWrapper.QueueSound("player_hurt", 0, false, 11);
 		}
 
 		if (info.getHealth() <= 0 && alive)
@@ -144,7 +145,9 @@ public class Player : MonoBehaviour
         temp.a = 0.0f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(deadPosition, gameObject.transform.rotation);
-		SoundEngineWrapper.QueueSound("player_die", 0, false, 11);
+		//SoundEngineWrapper.QueueSound("player_die", 0, false, 11);
+
+		print(respawnTimer);
 	}
 
 	public void respawn(Material m, GameObject location)
@@ -156,7 +159,8 @@ public class Player : MonoBehaviour
         temp.a = 0.2f;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = temp;
         gameObject.transform.SetPositionAndRotation(location.transform.position, location.transform.rotation);
-		SoundEngineWrapper.QueueSound("player_respawn", 0, false, 11);
+		//SoundEngineWrapper.QueueSound("player_respawn", 0, false, 11);
+		previousHealth = info.getHealth();
 	}
 
     void resetSpeed()
@@ -267,6 +271,7 @@ public class Player : MonoBehaviour
 
         dashing = false;
 		StopDashEmitter();
+		SoundEngineWrapper.QueueSound("player_dash_hit", 0, false, 11);
 	}
 
 	public void StartDashEmitter()

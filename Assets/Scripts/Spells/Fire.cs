@@ -18,7 +18,6 @@ public class Fire : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("Fire stuff");
         if (other.gameObject.GetComponent<Player>() != null)
         {
             int id;

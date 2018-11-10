@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 471}
   m_MaxSize: {x: 14002, y: 14021}
   vertical: 0
-  controlID: 52
+  controlID: 105
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 471}
   m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 53
+  controlID: 106
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 54
+  controlID: 107
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -418,15 +418,15 @@ MonoBehaviour:
     width: 948
     height: 650
   m_PersistentViewDataDictionary: {fileID: 0}
-  m_SceneLighting: 0
-  lastFramingTime: 1824.7851577740353
+  m_SceneLighting: 1
+  lastFramingTime: 5915.700311384615
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -6.349365, y: 3.8085313, z: 4.1338186}
+    m_Target: {x: -14.725086, y: -20.647581, z: 4.6087494}
     speed: 2
-    m_Value: {x: -6.349365, y: 3.8085313, z: 4.1338186}
+    m_Value: {x: -14.725086, y: -20.647581, z: 4.6087494}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -454,13 +454,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Target: {x: 0.31026724, y: -0.28805637, z: 0.09924925, w: 0.900504}
     speed: 2
-    m_Value: {x: 0.08717229, y: -0.89959055, z: 0.21045254, w: 0.3726226}
+    m_Value: {x: 0.31026724, y: -0.28805637, z: 0.09924925, w: 0.900504}
   m_Size:
-    m_Target: 13.049128
+    m_Target: 42.870155
     speed: 2
-    m_Value: 13.049128
+    m_Value: 42.870155
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -534,20 +534,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Obj Imports
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Obj Imports
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\100622415\Documents\Biftek
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 60}
-    m_SelectedIDs: f8090000
-    m_LastClickedID: 2552
-    m_ExpandedIDs: 0000000094090000e00900002a0a000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 94090000
+    m_LastClickedID: 2452
+    m_ExpandedIDs: 00000000940900002a0a0000900a000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -575,7 +575,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000094090000e00900002a0a0000
+    m_ExpandedIDs: 00000000940900002a0a0000900a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000960a00005e2e0000fc090000482b0000242c0000162c0000ba2c000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

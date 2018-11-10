@@ -17,15 +17,15 @@ public class SpellInventory : MonoBehaviour
         {
             SpellInventoryPlugin.assignSpell(i, 0, Spells.Fireball);
             SpellInventoryPlugin.assignSpell(i, 1, Spells.Bubbleshield);
-            SpellInventoryPlugin.assignSpell(i, 2, Spells.Hailstorm);
-            SpellInventoryPlugin.assignSpell(i, 3, Spells.Empty);
+            SpellInventoryPlugin.assignSpell(i, 2, Spells.Boulder);
+            SpellInventoryPlugin.assignSpell(i, 3, Spells.FireRun);
 
             int temp = i + 1;
             spellImage = GameObject.Find("Player" + temp + "UI").GetComponentsInChildren<Image>();
             spellImage[0].sprite = fireball;
             spellImage[1].sprite = bubbleShield;
-            spellImage[2].sprite = hailstorm;
-            spellImage[3].sprite = Empty;
+            spellImage[2].sprite = boulder;
+            spellImage[3].sprite = firerun;
         }
     }
 

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoundEnginePluginWrapper;
 
 public class Wall : MonoBehaviour
 {
     public int health;
-    public float cooldown;
-    public float lifeTime;
+	public static float cooldown = 10;
+	public float lifeTime;
     private Info info;
     public int owner;
     public bool initiated = false;
@@ -66,4 +67,9 @@ public class Wall : MonoBehaviour
         info.setHealth(health);
         initiated = true;
     }
+
+	void OnDestroy()
+	{
+		SoundEngineWrapper.QueueSound("wall_destroy", 0, false, 21);
+	}
 }
